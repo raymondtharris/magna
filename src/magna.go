@@ -4,6 +4,8 @@ import (
   "fmt"
   "../../docker_testing/src/magnauser"
   "strings"
+  "os"
+  "bufio"
 )
 
 type MagnaNode struct{
@@ -22,7 +24,7 @@ func displayInput(){
 
 func introduction(){
   //Determine if this is a new user
-  var newUser = magnauser.MagnaUser{"Tim", 113232444443}
+  var newUser = magnauser.MagnaUser{"", 113232444443}
   greeting(newUser)
 }
 
@@ -30,7 +32,9 @@ func greeting(mUser magnauser.MagnaUser){
   if mUser.Name == "" {
     fmt.Println("Hello, I am Magna. Who might you be?")
     var user string
-    fmt.Scanln(&user)
+    consoleReader := bufio.NewReader(os.Stdin)
+    input, _ := consoleReader.ReadString('\n')
+    user = input[0: len(input)-1]
     fmt.Println("Nice to meet you "+user+".")
   } else {
     fmt.Println("Hello, "+ mUser.Name + ". Welcome back.")
@@ -40,7 +44,10 @@ func greeting(mUser magnauser.MagnaUser){
 func whatToSearch(){
   fmt.Println("What can I do for you?")
   var queryInput string
-  fmt.Scanf("%s",&queryInput)
+  _, err := fmt.Scanf("%s\r\n", &queryInput)
+  if err != nil {
+    panic(err)
+  }
   fmt.Println(queryInput)
   splitQuery  := strings.Split(queryInput, " ")
   fmt.Println(splitQuery)
