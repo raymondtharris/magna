@@ -44,10 +44,9 @@ func greeting(mUser magnauser.MagnaUser){
 func whatToSearch(){
   fmt.Println("What can I do for you?")
   var queryInput string
-  _, err := fmt.Scanf("%s\r\n", &queryInput)
-  if err != nil {
-    panic(err)
-  }
+  consoleReader := bufio.NewReader(os.Stdin)
+  input, _ := consoleReader.ReadString('\n')
+  queryInput = input[0: len(input)-1]
   fmt.Println(queryInput)
   splitQuery  := strings.Split(queryInput, " ")
   fmt.Println(splitQuery)
