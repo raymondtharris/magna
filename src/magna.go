@@ -14,6 +14,7 @@ type MagnaNode struct{
   Weight int
 }
 
+var nodes []MagnaNode
 
 func displayInput(){
   fmt.Println("What would you like to explore?")
@@ -31,11 +32,9 @@ func introduction(){
 func greeting(mUser magnauser.MagnaUser){
   if mUser.Name == "" {
     fmt.Println("Hello, I am Magna. Who might you be?")
-    var user string
-    consoleReader := bufio.NewReader(os.Stdin)
-    input, _ := consoleReader.ReadString('\n')
-    user = input[0: len(input)-1]
-    fmt.Println("Nice to meet you "+user+".")
+    newUserName := readInput()
+    newUser := magnauser.MagnaUser{newUserName, 11122334234}
+    fmt.Println("Nice to meet you "+newUser.Name+".")
   } else {
     fmt.Println("Hello, "+ mUser.Name + ". Welcome back.")
   }
@@ -43,18 +42,23 @@ func greeting(mUser magnauser.MagnaUser){
 
 func whatToSearch(){
   fmt.Println("What can I do for you?")
-  var queryInput string
-  consoleReader := bufio.NewReader(os.Stdin)
-  input, _ := consoleReader.ReadString('\n')
-  queryInput = input[0: len(input)-1]
-  fmt.Println(queryInput)
+  queryInput := readInput()
   splitQuery  := strings.Split(queryInput, " ")
-  fmt.Println(splitQuery)
-  for i:= 0; i< len(splitQuery); i++ {
-
-    fmt.Println(splitQuery[i])
+  for index, aWord := range splitQuery{
+    //create node from each word
+    var newNode = MagnaNode{index, aWord, 1} // change Index to a randomly made hash of some sort
+    nodes = append(nodes, newNode)
   }
+  fmt.Println(nodes)
 }
+
+func readInput()  string {
+  consoleReader := bufio.NewReader(os.Stdin)
+  rawInput, _ := consoleReader.ReadString('\n')
+  inputValue := rawInput[0: len(rawInput)-1]
+  return inputValue
+}
+
 
 func main() {
   introduction()
