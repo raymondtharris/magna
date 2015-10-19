@@ -18,3 +18,7 @@ func (mUser User) String() string {
 type Interest struct {
 	Name string //Name of the interest
 }
+
+func (mInterest Interest) String() string {
+	return fmt.Sprintf("%v", mInterest.Name)
+}

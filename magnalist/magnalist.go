@@ -1,8 +1,14 @@
 package magnalist
 
+import(
+	"fmt"
+	"magna/magnagraph"
+)
+
 //Node for a list
 type Node struct {
 	Next *Node
+	Payload *magnagraph.Node
 }
 
 //List data structure
@@ -56,4 +62,9 @@ func (mList List) isEmpty() bool {
 	}
 	return false
 
+}
+
+//Search will look for a Node and return in from a list
+func (mList List) Search(nodeToFind *magnagraph.Node) *Node{
+	return nil
 }

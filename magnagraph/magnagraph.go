@@ -1,5 +1,9 @@
 package magnagraph
 
+import (
+	"fmt"
+	"magna/magnalist"
+)
 //Graph is comething
 type Graph struct {
 }
