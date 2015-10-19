@@ -3,10 +3,9 @@ package main
 import (
 	"bufio"
 	"fmt"
+	"magna/src/magnauser"
 	"os"
 	"strings"
-
-	"../../docker_testing/src/magnauser"
 )
 
 type MagnaNode struct { //this
