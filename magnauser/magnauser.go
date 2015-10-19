@@ -4,11 +4,17 @@ import (
 	"fmt"
 )
 
-type MagnaUser struct {
-	Name  string
-	IdTag int
+//User is the object to store info about the user
+type User struct {
+	Name  string //Name of the User
+	IDTag int    //IDTag of the User
 }
 
-func (mUser MagnaUser) String() string {
-	return fmt.Sprintf("username: %v, Tag: %v", mUser.Name, mUser.IdTag)
+func (mUser User) String() string {
+	return fmt.Sprintf("username: %v, Tag: %v", mUser.Name, mUser.IDTag)
+}
+
+//Interest is an object to store something the user likes
+type Interest struct {
+	Name string //Name of the interest
 }

@@ -3,18 +3,13 @@ package main
 import (
 	"bufio"
 	"fmt"
-	"magna/src/magnauser"
+	"magna/magnagraph"
+	"magna/magnauser"
 	"os"
 	"strings"
 )
 
-type MagnaNode struct { //this
-	Index  int    //Inex of the node
-	Value  string //String value for the particular node
-	Weight int    // Weight of the node in relation to the others
-}
-
-var nodes []MagnaNode
+var nodes []magnagraph.Node
 
 func displayInput() {
 	fmt.Println("What would you like to explore?")
@@ -23,15 +18,15 @@ func displayInput() {
 
 func introduction() {
 	//Determine if this is a new user
-	var newUser = magnauser.MagnaUser{"", 113232444443}
+	var newUser = magnauser.User{"", 113232444443}
 	greeting(newUser)
 }
 
-func greeting(mUser magnauser.MagnaUser) {
+func greeting(mUser magnauser.User) {
 	if mUser.Name == "" {
 		fmt.Println("Hello, I am Magna. Who might you be?")
 		newUserName := readInput()
-		newUser := magnauser.MagnaUser{newUserName, 11122334234}
+		newUser := magnauser.User{newUserName, 11122334234}
 		fmt.Println("Nice to meet you " + newUser.Name + ".")
 	} else {
 		fmt.Println("Hello, " + mUser.Name + ". Welcome back.")
@@ -44,7 +39,7 @@ func whatToSearch() {
 	splitQuery := strings.Split(queryInput, " ")
 	for index, aWord := range splitQuery {
 		//create node from each word
-		var newNode = MagnaNode{index, aWord, 1} // change Index to a randomly made hash of some sort
+		var newNode = magnagraph.Node{index, aWord, 1} // change Index to a randomly made hash of some sort
 		nodes = append(nodes, newNode)
 	}
 	fmt.Println(nodes)

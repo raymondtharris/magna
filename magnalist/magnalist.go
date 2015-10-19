@@ -1,27 +1,31 @@
 package magnalist
 
-type magnaListNode struct {
-	Next *magnaListNode
+//Node for a list
+type Node struct {
+	Next *Node
 }
 
-type magnaList struct {
-	Head   *magnaListNode
-	Tail   *magnaListNode
+//List data structure
+type List struct {
+	Head   *Node
+	Tail   *Node
 	Length int
 }
 
-func (mList magnaList) Push(newListNode *magnaListNode) {
+//Push inserts a Node at the end of the List
+func (mList List) Push(newNode *Node) {
 	if mList.Head == nil {
-		mList.Head = newListNode
+		mList.Head = newNode
 		mList.Tail = mList.Head
 	} else {
-		mList.Tail.Next = newListNode
-		mList.Tail = newListNode
+		mList.Tail.Next = newNode
+		mList.Tail = newNode
 	}
 	mList.Length++
 }
 
-func (mList magnaList) Pop() *magnaListNode {
+//Pop removes a Node from the end of the List
+func (mList List) Pop() *Node {
 	if mList.Tail == mList.Head {
 		returnNode := mList.Head
 		mList.Tail = nil
@@ -30,7 +34,7 @@ func (mList magnaList) Pop() *magnaListNode {
 		return returnNode
 	} else if mList.Tail != nil {
 		currentNode := mList.Head
-		var returnNode *magnaListNode
+		var returnNode *Node
 		for currentNode != mList.Tail {
 			if currentNode.Next != mList.Tail {
 				currentNode = currentNode.Next
@@ -46,7 +50,7 @@ func (mList magnaList) Pop() *magnaListNode {
 	return nil
 }
 
-func (mList magnaList) isEmpty() bool {
+func (mList List) isEmpty() bool {
 	if mList.Head == nil {
 		return true
 	}
