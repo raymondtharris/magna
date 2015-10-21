@@ -57,5 +57,4 @@ func main() {
 	//for {
 	whatToSearch()
 	//}
-	fmt.Println("temp")
 }
