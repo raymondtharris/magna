@@ -64,5 +64,13 @@ func (mQueue queue) isEmpty() bool {
 
 //Search will look for a Node and return in from a queue
 func (mQueue queue) Search(nodeToFind *Node) *node{
+	currentNode := mQueue.Head
+	for currentNode != nil {
+		if currentNode.Payload == nodeToFind.Payload{
+			return currentNode
+		} else{
+			currentNode = currentNode.Next
+		}
+	}
 	return nil
 }
