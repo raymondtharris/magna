@@ -1,49 +1,51 @@
 package magnagraph
 
-import (
-	//"fmt"
-)
+//"fmt"
 
 //Graph Code
 
 //Graph is comething
 type Graph struct {
 	NumberOfVerticies int
-	NumberOfEdges int
-	ADJList []Node
-	isBidirectional bool
+	NumberOfEdges     int
+	ADJList           []Node
+	isBidirectional   bool
 }
 
 //Node is something
 type Node struct {
-	Index  int    //Inex of the node
-	Value  string //String value for the particular node
-	Weight int    // Weight of the node in relation to the others
+	Index     int        //Inex of the node
+	Value     string     //String value for the particular node
+	Weight    int        // Weight of the node in relation to the others
 	Neighbors []Neighbor //Array of nodes connected to this particular node
 }
 
+//Neighbor struct to store a node and the cost of the node
 type Neighbor struct {
 	Vertex Node
-	Cost int
+	Cost   int
 }
 
-func (mGraph Graph) AddVertex(newVertex *Node){
+//AddVertex function inserts a node into the ADJList if not present.
+func (mGraph Graph) AddVertex(newVertex *Node) {
 	isInGraph := false
 	for _, aNode := range mGraph.ADJList {
-		if aNode == newVertex {
+		if &aNode == newVertex {
 			isInGraph = true
 		}
 	}
-	if isInGraph == false{
-		mGraph.ADJList = append(mGraph.ADJList, newVertex)
+	if isInGraph == false {
+		mGraph.ADJList = append(mGraph.ADJList, *newVertex)
 		mGraph.NumberOfVerticies++
 	}
 }
 
-func (mNode Node) AddNeighbor(newNeighbor *Node, withCost int){
+//AddNeighbor inserts a neighbor node in to an array to keep track of connections
+// to a particular node.
+func (mNode Node) AddNeighbor(newNeighbor *Node, withCost int) {
 	isANeighbor := false
 	savedIndex := 0
-	for index , aNode := range mNode.Neighbors {
+	for index, aNode := range mNode.Neighbors {
 		if aNode == newNeighbor.Vertex {
 			isANeighbor = true
 			savedIndex = index
@@ -58,7 +60,7 @@ func (mNode Node) AddNeighbor(newNeighbor *Node, withCost int){
 
 //AddEdgeBetween function inserts an edge between two vertecies in the graph. This is done
 //by adding a Neighbor to the nodes.
-func (mGraph Graph) AddEdgeBetween(vertex1 *Node, andVertex2 *Node,[]int withCosts) {
+func (mGraph Graph) AddEdgeBetween(vertex1 *Node, andVertex2 *Node, withCosts []int) {
 	mGraph.AddVertex(vertex1)
 	mGraph.AddVertex(andVertex2)
 	if len(withCosts) > 1 {
@@ -78,7 +80,7 @@ func (mGraph Graph) AddEdgeBetween(vertex1 *Node, andVertex2 *Node,[]int withCos
 
 //Node for a queue
 type node struct {
-	Next *node
+	Next    *node
 	Payload *Node
 }
 
@@ -122,12 +124,12 @@ func (mQueue queue) isEmpty() bool {
 }
 
 //Search will look for a Node and return in from a queue
-func (mQueue queue) Search(nodeToFind *Node) *node{
+func (mQueue queue) Search(nodeToFind *Node) *node {
 	currentNode := mQueue.Head
 	for currentNode != nil {
-		if currentNode.Payload == nodeToFind.Payload{
+		if currentNode.Payload == nodeToFind.Payload {
 			return currentNode
-		} else{
+		} else {
 			currentNode = currentNode.Next
 		}
 	}
