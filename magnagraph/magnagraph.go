@@ -11,6 +11,7 @@ type Graph struct {
 	NumberOfVerticies int
 	NumberOfEdges int
 	ADJList []Node
+	isBidirectional bool
 }
 
 //Node is something
@@ -52,6 +53,24 @@ func (mNode Node) AddNeighbor(newNeighbor *Node, withCost int){
 		mNode.Neighbors[index].Cost = withCost
 	} else {
 		mNode.Neighbors = append(mNode.Neighbors, Neighbor{newNeighbor, withCost})
+	}
+}
+
+//AddEdgeBetween function inserts an edge between two vertecies in the graph. This is done
+//by adding a Neighbor to the nodes.
+func (mGraph Graph) AddEdgeBetween(vertex1 *Node, andVertex2 *Node,[]int withCosts) {
+	mGraph.AddVertex(vertex1)
+	mGraph.AddVertex(andVertex2)
+	if len(withCosts) > 1 {
+		vertex1.AddNeighbor(andVertex2, withCosts[1])
+		if mGraph.isBidirectional {
+			andVertex2.AddNeighbor(vertex1, withCosts[0])
+		}
+	} else {
+		vertex1.AddNeighbor(andVertex2, withCosts[0])
+		if mGraph.isBidirectional {
+			andVertex2.AddNeighbor(vertex1, withCosts[0])
+		}
 	}
 }
 
