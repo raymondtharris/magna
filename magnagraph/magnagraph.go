@@ -46,15 +46,15 @@ func (mNode Node) AddNeighbor(newNeighbor *Node, withCost int) {
 	isANeighbor := false
 	savedIndex := 0
 	for index, aNode := range mNode.Neighbors {
-		if aNode == newNeighbor.Vertex {
+		if &aNode.Vertex == newNeighbor {
 			isANeighbor = true
 			savedIndex = index
 		}
 	}
 	if isANeighbor == true {
-		mNode.Neighbors[index].Cost = withCost
+		mNode.Neighbors[savedIndex].Cost = withCost
 	} else {
-		mNode.Neighbors = append(mNode.Neighbors, Neighbor{newNeighbor, withCost})
+		mNode.Neighbors = append(mNode.Neighbors, Neighbor{*newNeighbor, withCost})
 	}
 }
 
@@ -74,6 +74,16 @@ func (mGraph Graph) AddEdgeBetween(vertex1 *Node, andVertex2 *Node, withCosts []
 			andVertex2.AddNeighbor(vertex1, withCosts[0])
 		}
 	}
+}
+
+//findVertex function searches through  ADJList for a node. Will be switched to a binary search.
+func (mGraph Graph) findVertex(vertexToFind *Node) *Node {
+	for _, aNode := range mGraph.ADJList {
+		if &aNode == vertexToFind {
+			return &aNode
+		}
+	}
+	return nil
 }
 
 //Queue Code
@@ -109,7 +119,7 @@ func (mQueue queue) Dequque() *node {
 		nodeToReturn := mQueue.Head
 		mQueue.Head = mQueue.Head.Next
 		nodeToReturn.Next = nil
-		mQueue.Lenth--
+		mQueue.Length--
 		return nodeToReturn
 	}
 	return nil
@@ -127,11 +137,11 @@ func (mQueue queue) isEmpty() bool {
 func (mQueue queue) Search(nodeToFind *Node) *node {
 	currentNode := mQueue.Head
 	for currentNode != nil {
-		if currentNode.Payload == nodeToFind.Payload {
+		if currentNode.Payload == nodeToFind {
 			return currentNode
-		} else {
-			currentNode = currentNode.Next
 		}
+		currentNode = currentNode.Next
+
 	}
 	return nil
 }
