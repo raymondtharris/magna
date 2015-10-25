@@ -9,7 +9,7 @@ type Graph struct {
 	NumberOfVerticies int
 	NumberOfEdges     int
 	ADJList           []Node
-	isBidirectional   bool
+	IsBidirectional   bool
 }
 
 //Node is something
@@ -65,12 +65,12 @@ func (mGraph Graph) AddEdgeBetween(vertex1 *Node, andVertex2 *Node, withCosts []
 	mGraph.AddVertex(andVertex2)
 	if len(withCosts) > 1 {
 		vertex1.AddNeighbor(andVertex2, withCosts[1])
-		if mGraph.isBidirectional {
+		if mGraph.IsBidirectional {
 			andVertex2.AddNeighbor(vertex1, withCosts[0])
 		}
 	} else {
 		vertex1.AddNeighbor(andVertex2, withCosts[0])
-		if mGraph.isBidirectional {
+		if mGraph.IsBidirectional {
 			andVertex2.AddNeighbor(vertex1, withCosts[0])
 		}
 	}
@@ -86,13 +86,24 @@ func (mGraph Graph) findVertex(vertexToFind *Node) *Node {
 	return nil
 }
 
+//findShortestPathBetween function searches for the shortest path of two nodes using a breadth first search
+//algorithm.
 func (mGraph Graph) findShortestPathBetween(startVertex *Node, andEndVertex *Node) {
 	originNode := mGraph.findVertex(startVertex)
-	nodeToCheck := queue{nil, nil, 0}
+	nodesToCheck := queue{nil, nil, 0}
 	path := queue{nil, nil, 0}
 	if originNode == andEndVertex {
 		newInsert := node{nil, originNode}
-		path.Enqueue(&newInsert)
+		path.Enqueue(&newInsert) // Change to returnPath
+	}
+	newInsert := node{nil, originNode}
+	path.Enqueue(&newInsert)
+	for nodesToCheck.Length > 0 {
+		currentNode := nodesToCheck.Dequque()
+		for _, neighborNode := range currentNode.Payload.Neighbors {
+			newNode := node{nil, &neighborNode.Vertex}
+			nodesToCheck.Enqueue(&newNode)
+		}
 	}
 }
 

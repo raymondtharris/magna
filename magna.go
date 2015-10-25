@@ -10,6 +10,7 @@ import (
 )
 
 var nodes []magnagraph.Node
+var magnasMind magnagraph.Graph
 
 func displayInput() {
 	fmt.Println("What would you like to explore?")
@@ -39,7 +40,7 @@ func whatToSearch() {
 	splitQuery := strings.Split(queryInput, " ")
 	for index, aWord := range splitQuery {
 		//create node from each word
-		var newNode = magnagraph.Node{index, aWord, 1} // change Index to a randomly made hash of some sort
+		var newNode = magnagraph.Node{index, aWord, 1, nil} // change Index to a randomly made hash of some sort
 		nodes = append(nodes, newNode)
 	}
 	fmt.Println(nodes)
@@ -53,6 +54,7 @@ func readInput() string {
 }
 
 func main() {
+	magnasMind = magnagraph.Graph{0, 0, nil, true}
 	introduction()
 	//for {
 	whatToSearch()
