@@ -86,6 +86,16 @@ func (mGraph Graph) findVertex(vertexToFind *Node) *Node {
 	return nil
 }
 
+func (mGraph Graph) findShortestPathBetween(startVertex *Node, andEndVertex *Node) {
+	originNode := mGraph.findVertex(startVertex)
+	nodeToCheck := queue{nil, nil, 0}
+	path := queue{nil, nil, 0}
+	if originNode == andEndVertex {
+		newInsert := node{nil, originNode}
+		path.Enqueue(&newInsert)
+	}
+}
+
 //Queue Code
 
 //Node for a queue
