@@ -53,8 +53,13 @@ func readInput() string {
 	return inputValue
 }
 
-func main() {
+func loadMagnasMind() bool {
 	magnasMind = magnagraph.Graph{0, 0, nil, true}
+	return true
+}
+
+func main() {
+	loadMagnasMind()
 	introduction()
 	//for {
 	whatToSearch()
