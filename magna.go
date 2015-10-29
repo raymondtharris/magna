@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"magna/magnagraph"
 	"magna/magnauser"
+	"magna/magnaio"
 	"os"
 	"strings"
 )
@@ -26,7 +27,7 @@ func introduction() {
 func greeting(mUser magnauser.User) {
 	if mUser.Name == "" {
 		fmt.Println("Hello, I am Magna. Who might you be?")
-		newUserName := readInput()
+		newUserName := magnaio.ReadInput()
 		newUser := magnauser.User{newUserName, 11122334234}
 		fmt.Println("Nice to meet you " + newUser.Name + ".")
 	} else {
@@ -36,7 +37,7 @@ func greeting(mUser magnauser.User) {
 
 func whatToSearch() {
 	fmt.Println("What can I do for you?")
-	queryInput := readInput()
+	queryInput := magnaio.ReadInput()
 	splitQuery := strings.Split(queryInput, " ")
 	for index, aWord := range splitQuery {
 		//create node from each word
@@ -46,12 +47,7 @@ func whatToSearch() {
 	fmt.Println(nodes)
 }
 
-func readInput() string {
-	consoleReader := bufio.NewReader(os.Stdin)
-	rawInput, _ := consoleReader.ReadString('\n')
-	inputValue := rawInput[0 : len(rawInput)-1]
-	return inputValue
-}
+
 
 func loadMagnasMind() bool {
 	magnasMind = magnagraph.Graph{0, 0, nil, true}
