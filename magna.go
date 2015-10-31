@@ -1,17 +1,22 @@
 package main
 
 import (
-	"bufio"
 	"fmt"
 	"magna/magnagraph"
 	"magna/magnauser"
 	"magna/magnaio"
-	"os"
 	"strings"
+	"github.com/gorilla/websocket"
+	"net/http"
 )
 
 var nodes []magnagraph.Node
 var magnasMind magnagraph.Graph
+
+var upgrader = websocket.Upgrader{
+	ReadBufferSize: 1024,
+	WriteBufferSize: 1024,
+}
 
 func displayInput() {
 	fmt.Println("What would you like to explore?")
@@ -54,10 +59,16 @@ func loadMagnasMind() bool {
 	return true
 }
 
+func testHandler(w http.ResponseWriter, r *http.Request){
+	connection, err := upgrader.Upgrade(w,r , nil)
+	if err != nil {
+		log.Println(err)
+		return
+	}
+}
+
 func main() {
 	loadMagnasMind()
-	introduction()
-	//for {
-	whatToSearch()
-	//}
+	http.HandleFunc("/", testHandler)
+	http.ListenAndServe("localhost:8080", nil)
 }
