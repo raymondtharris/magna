@@ -65,6 +65,15 @@ func testHandler(w http.ResponseWriter, r *http.Request){
 		log.Println(err)
 		return
 	}
+	for {
+		messageType, p, err1 := connection.ReadMessage()
+		if err1 != nil {
+			return
+		}
+		if err1 = connection.WriteMessage(messageType, p); err1 != nil {
+			return err1
+		}
+	}
 }
 
 func main() {
