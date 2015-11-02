@@ -3,18 +3,19 @@ package main
 import (
 	"fmt"
 	"magna/magnagraph"
-	"magna/magnauser"
 	"magna/magnaio"
-	"strings"
-	"github.com/gorilla/websocket"
+	"magna/magnauser"
 	"net/http"
+	"strings"
+
+	"github.com/gorilla/websocket"
 )
 
 var nodes []magnagraph.Node
 var magnasMind magnagraph.Graph
 
 var upgrader = websocket.Upgrader{
-	ReadBufferSize: 1024,
+	ReadBufferSize:  1024,
 	WriteBufferSize: 1024,
 }
 
@@ -52,17 +53,15 @@ func whatToSearch() {
 	fmt.Println(nodes)
 }
 
-
-
 func loadMagnasMind() bool {
 	magnasMind = magnagraph.Graph{0, 0, nil, true}
 	return true
 }
 
-func testHandler(w http.ResponseWriter, r *http.Request){
-	connection, err := upgrader.Upgrade(w,r , nil)
+func testHandler(w http.ResponseWriter, r *http.Request) {
+	connection, err := upgrader.Upgrade(w, r, nil)
 	if err != nil {
-		log.Println(err)
+		fmt.Println(err)
 		return
 	}
 	for {
@@ -70,14 +69,21 @@ func testHandler(w http.ResponseWriter, r *http.Request){
 		if err1 != nil {
 			return
 		}
-		if err1 = connection.WriteMessage(messageType, p); err1 != nil {
-			return err1
+		fmt.Println(string(p))
+		err1 = connection.WriteMessage(messageType, p)
+		if err1 != nil {
+			return
 		}
 	}
+}
+
+func queryHandler(w http.ResponseWriter, r *http.Request) {
+
 }
 
 func main() {
 	loadMagnasMind()
 	http.HandleFunc("/", testHandler)
+	http.HandleFunc("/query", queryHandler)
 	http.ListenAndServe("localhost:8080", nil)
 }
