@@ -1,7 +1,9 @@
 package main
 
 import (
+	"encoding/json"
 	"fmt"
+	"io/ioutil"
 	"magna/magnagraph"
 	"magna/magnaio"
 	"magna/magnauser"
@@ -10,6 +12,11 @@ import (
 
 	"github.com/gorilla/websocket"
 )
+
+type magnaQueryObject struct {
+	User        magnauser.User
+	QueryString string
+}
 
 var nodes []magnagraph.Node
 var magnasMind magnagraph.Graph
@@ -78,7 +85,15 @@ func testHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func queryHandler(w http.ResponseWriter, r *http.Request) {
-
+	body, err := ioutil.ReadAll(r.Body)
+	if err != nil {
+		panic(err)
+	}
+	var query magnaQueryObject
+	err = json.Unmarshal([]byte(string(body[:])), &query)
+	if err != nil {
+		panic(err)
+	}
 }
 
 func main() {
