@@ -4,11 +4,12 @@ import (
 	"encoding/json"
 	"fmt"
 	"io/ioutil"
-	"magna/magnagraph"
-	"magna/magnaio"
-	"magna/magnauser"
 	"net/http"
 	"strings"
+
+	"github.com/magna/magnagraph"
+	"github.com/magna/magnaio"
+	"github.com/magna/magnauser"
 
 	"github.com/gorilla/websocket"
 )
