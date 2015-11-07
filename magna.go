@@ -8,7 +8,6 @@ import (
 	"strings"
 
 	"github.com/magna/magnagraph"
-	"github.com/magna/magnaio"
 	"github.com/magna/magnauser"
 
 	"github.com/gorilla/websocket"
@@ -31,45 +30,20 @@ var upgrader = websocket.Upgrader{
 	WriteBufferSize: 1024,
 }
 
-func displayInput() {
-	fmt.Println("What would you like to explore?")
-	//Take in input from the user.
-}
-
-func introduction() {
-	//Determine if this is a new user
-	var newUser = magnauser.User{"", 113232444443}
-	greeting(newUser)
-}
-
-func greeting(mUser magnauser.User) {
-	if mUser.Name == "" {
-		fmt.Println("Hello, I am Magna. Who might you be?")
-		newUserName := magnaio.ReadInput()
-		newUser := magnauser.User{newUserName, 11122334234}
-		fmt.Println("Nice to meet you " + newUser.Name + ".")
-	} else {
-		fmt.Println("Hello, " + mUser.Name + ". Welcome back.")
-	}
-}
-
-func whatToSearch() {
-	fmt.Println("What can I do for you?")
-	queryInput := magnaio.ReadInput()
-	splitQuery := strings.Split(queryInput, " ")
-	for index, aWord := range splitQuery {
-		//create node from each word
-		var newNode = magnagraph.Node{index, aWord, 1, nil} // change Index to a randomly made hash of some sort
-		nodes = append(nodes, newNode)
-	}
-	fmt.Println(nodes)
-}
-
 func loadMagnasMind() bool {
 	magnasMind = magnagraph.Graph{0, 0, nil, true}
 	return true
 }
 
+func tokenizeQuery(queryObject magnaQueryObject) {
+	splitQueryString := strings.Split(queryObject.QueryString, " ")
+	for index, aWord := range splitQueryString {
+		newNode := magnagraph.Node{index, aWord, 1, nil}
+		magnasMind.AddVertex(&newNode)
+	}
+}
+
+// Handlers for Magana
 func testHandler(w http.ResponseWriter, r *http.Request) {
 	connection, err := upgrader.Upgrade(w, r, nil)
 	if err != nil {
@@ -102,6 +76,7 @@ func queryHandler(w http.ResponseWriter, r *http.Request) {
 		panic(err)
 	}
 	fmt.Println(query)
+	tokenizeQuery(query)
 }
 
 func main() {
