@@ -19,6 +19,10 @@ type magnaQueryObject struct {
 	QueryString string
 }
 
+func (mqo magnaQueryObject) String() string {
+	return fmt.Sprintf("User: %v, Query: %v", mqo.User, mqo.QueryString)
+}
+
 var nodes []magnagraph.Node
 var magnasMind magnagraph.Graph
 
@@ -86,6 +90,8 @@ func testHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func queryHandler(w http.ResponseWriter, r *http.Request) {
+	fmt.Println("Query Received.")
+
 	body, err := ioutil.ReadAll(r.Body)
 	if err != nil {
 		panic(err)
@@ -95,6 +101,7 @@ func queryHandler(w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		panic(err)
 	}
+	fmt.Println(query)
 }
 
 func main() {
