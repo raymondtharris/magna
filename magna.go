@@ -22,7 +22,10 @@ func (mqo magnaQueryObject) String() string {
 	return fmt.Sprintf("User: %v, Query: %v", mqo.User, mqo.QueryString)
 }
 
-var nodes []magnagraph.Node
+//current query being processed
+var queryTokens []magnagraph.Node
+
+//graph used to solve queries
 var magnasMind magnagraph.Graph
 
 var upgrader = websocket.Upgrader{
@@ -35,12 +38,18 @@ func loadMagnasMind() bool {
 	return true
 }
 
-func tokenizeQuery(queryObject magnaQueryObject) {
+func tokenizeQuery(queryObject magnaQueryObject) []magnagraph.Node {
+	var tokenArray []magnagraph.Node
 	splitQueryString := strings.Split(queryObject.QueryString, " ")
 	for index, aWord := range splitQueryString {
 		newNode := magnagraph.Node{index, aWord, 1, nil}
-		magnasMind.AddVertex(&newNode)
+		tokenArray = append(tokenArray, newNode)
 	}
+	return tokenArray
+}
+
+func processQueryTokens(tokens []magnagraph.Node) {
+
 }
 
 // Handlers for Magana
@@ -76,7 +85,7 @@ func queryHandler(w http.ResponseWriter, r *http.Request) {
 		panic(err)
 	}
 	fmt.Println(query)
-	tokenizeQuery(query)
+	queryTokens = tokenizeQuery(query)
 }
 
 func main() {
