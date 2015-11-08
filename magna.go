@@ -7,10 +7,10 @@ import (
 	"net/http"
 	"strings"
 
-	"github.com/magna/magnagraph"
-	"github.com/magna/magnauser"
-
 	"github.com/gorilla/websocket"
+	"github.com/magna/magnagraph"
+	"github.com/magna/magnalanguage"
+	"github.com/magna/magnauser"
 )
 
 type magnaQueryObject struct {
@@ -86,6 +86,9 @@ func queryHandler(w http.ResponseWriter, r *http.Request) {
 	}
 	fmt.Println(query)
 	queryTokens = tokenizeQuery(query)
+	for _, aNode := range queryTokens {
+		magnalanguage.ProcessNode(aNode)
+	}
 }
 
 func main() {
