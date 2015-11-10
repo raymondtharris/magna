@@ -42,7 +42,7 @@ func tokenizeQuery(queryObject magnaQueryObject) []magnagraph.Node {
 	var tokenArray []magnagraph.Node
 	splitQueryString := strings.Split(queryObject.QueryString, " ")
 	for index, aWord := range splitQueryString {
-		newNode := magnagraph.Node{index, aWord, 1, nil}
+		newNode := magnagraph.Node{index, aWord, 1, nil, -1}
 		tokenArray = append(tokenArray, newNode)
 	}
 	return tokenArray

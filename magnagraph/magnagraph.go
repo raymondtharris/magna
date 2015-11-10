@@ -1,8 +1,19 @@
 package magnagraph
 
-//"fmt"
+const (
+	PRONOUN   = 1
+	NOUN      = 2
+	ADJECTIVE = 3
+	VERB      = 4
+	ADVERB    = 5
+)
 
 //Graph Code
+
+type Path struct {
+	Cost     int
+	Sequence queue
+}
 
 //Graph is comething
 type Graph struct {
@@ -14,10 +25,11 @@ type Graph struct {
 
 //Node is something
 type Node struct {
-	Index     int        //Inex of the node
-	Value     string     //String value for the particular node
-	Weight    int        // Weight of the node in relation to the others
-	Neighbors []Neighbor //Array of nodes connected to this particular node
+	Index       int        //Inex of the node
+	Value       string     //String value for the particular node
+	Weight      int        // Weight of the node in relation to the others
+	Neighbors   []Neighbor //Array of nodes connected to this particular node
+	ProcessType int        //Type given to each node
 }
 
 //Neighbor struct to store a node and the cost of the node
