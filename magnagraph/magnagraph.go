@@ -1,5 +1,7 @@
 package magnagraph
 
+import "fmt"
+
 const (
 	PRONOUN   = 1
 	NOUN      = 2
@@ -13,6 +15,10 @@ const (
 type Path struct {
 	Cost     int
 	Sequence queue
+}
+
+func (mPath Path) String() string {
+	return fmt.Sprintf("Cost: %v Path: %v", mPath.Cost, mPath.Sequence)
 }
 
 //Graph is comething
@@ -36,6 +42,10 @@ type Node struct {
 type Neighbor struct {
 	Vertex Node
 	Cost   int
+}
+
+func (mNeighbor Neighbor) String() string {
+	return fmt.Sprintf("Node: %v Cost: %v", mNeighbor.Vertex, mNeighbor.Cost)
 }
 
 //AddVertex function inserts a node into the ADJList if not present.
