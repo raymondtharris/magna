@@ -26,7 +26,11 @@ type Graph struct {
 	NumberOfVerticies int
 	NumberOfEdges     int
 	ADJList           []Node
-	IsBidirectional   bool
+	IsDirected        bool
+}
+
+func (mGraph Graph) String() string {
+	return fmt.Sprintf("Verticies: %v Edges: %v Directed: %v\n  List: %v", mGraph.NumberOfVerticies, mGraph.NumberOfEdges, mGraph.IsDirected, mGraph.ADJList)
 }
 
 //Node is something
@@ -36,6 +40,10 @@ type Node struct {
 	Weight      int        // Weight of the node in relation to the others
 	Neighbors   []Neighbor //Array of nodes connected to this particular node
 	ProcessType int        //Type given to each node
+}
+
+func (mNode Node) String() string {
+	return fmt.Sprintf("Value: %v ProcessType: %v Weight: %v Neighbors: %v", mNode.Value, mNode.ProcessType, mNode.Weight, mNode.Neighbors)
 }
 
 //Neighbor struct to store a node and the cost of the node
@@ -87,12 +95,12 @@ func (mGraph Graph) AddEdgeBetween(vertex1 *Node, andVertex2 *Node, withCosts []
 	mGraph.AddVertex(andVertex2)
 	if len(withCosts) > 1 {
 		vertex1.AddNeighbor(andVertex2, withCosts[1])
-		if mGraph.IsBidirectional {
+		if mGraph.IsDirected {
 			andVertex2.AddNeighbor(vertex1, withCosts[0])
 		}
 	} else {
 		vertex1.AddNeighbor(andVertex2, withCosts[0])
-		if mGraph.IsBidirectional {
+		if mGraph.IsDirected {
 			andVertex2.AddNeighbor(vertex1, withCosts[0])
 		}
 	}
@@ -135,6 +143,10 @@ func (mGraph Graph) findShortestPathBetween(startVertex *Node, andEndVertex *Nod
 type node struct {
 	Next    *node
 	Payload *Node
+}
+
+func (qNode node) String() string {
+	return fmt.Sprintf("%v ", qNode.Payload)
 }
 
 //Queue data structure
