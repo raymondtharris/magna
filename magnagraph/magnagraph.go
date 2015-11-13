@@ -156,6 +156,21 @@ type queue struct {
 	Length int
 }
 
+func (mQueue queue) String() string {
+	current := mQueue.Head
+	prString := "" + current.String() + " -> "
+	for current.Next != nil {
+		current = current.Next
+		if current.Next != nil {
+			prString = prString + " " + current.String() + " -> "
+		} else {
+			prString = prString + " " + current.String() + " "
+		}
+	}
+
+	return fmt.Sprintf("%v", prString)
+}
+
 //Push inserts a Node at the end of the List
 func (mQueue queue) Enqueue(newNode *node) {
 	if mQueue.Head == nil {
