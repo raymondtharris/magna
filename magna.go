@@ -10,15 +10,9 @@ import (
 	"github.com/gorilla/websocket"
 	"github.com/magna/magnagraph"
 	"github.com/magna/magnalanguage"
-	"github.com/magna/magnauser"
 )
 
-type magnaQueryObject struct {
-	User        magnauser.User
-	QueryString string
-}
-
-func (mqo magnaQueryObject) String() string {
+func (mqo *magnalanguage.MagnaQueryObject) String() string {
 	return fmt.Sprintf("User: %v, Query: %v", mqo.User, mqo.QueryString)
 }
 
@@ -38,7 +32,7 @@ func loadMagnasMind() bool {
 	return true
 }
 
-func tokenizeQuery(queryObject magnaQueryObject) []magnagraph.Node {
+func tokenizeQuery(queryObject magnalanguage.MagnaQueryObject) []magnagraph.Node {
 	var tokenArray []magnagraph.Node
 	splitQueryString := strings.Split(queryObject.QueryString, " ")
 	for index, aWord := range splitQueryString {
@@ -79,7 +73,7 @@ func queryHandler(w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		panic(err)
 	}
-	var query magnaQueryObject
+	var query magnalanguage.MagnaQueryObject
 	err = json.Unmarshal([]byte(string(body[:])), &query)
 	if err != nil {
 		panic(err)
