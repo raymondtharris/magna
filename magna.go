@@ -5,16 +5,11 @@ import (
 	"fmt"
 	"io/ioutil"
 	"net/http"
-	"strings"
 
 	"github.com/gorilla/websocket"
 	"github.com/magna/magnagraph"
 	"github.com/magna/magnalanguage"
 )
-
-func (mqo *magnalanguage.MagnaQueryObject) String() string {
-	return fmt.Sprintf("User: %v, Query: %v", mqo.User, mqo.QueryString)
-}
 
 //current query being processed
 var queryTokens []magnagraph.Node
@@ -30,20 +25,6 @@ var upgrader = websocket.Upgrader{
 func loadMagnasMind() bool {
 	magnasMind = magnagraph.Graph{0, 0, nil, true}
 	return true
-}
-
-func tokenizeQuery(queryObject magnalanguage.MagnaQueryObject) []magnagraph.Node {
-	var tokenArray []magnagraph.Node
-	splitQueryString := strings.Split(queryObject.QueryString, " ")
-	for index, aWord := range splitQueryString {
-		newNode := magnagraph.Node{index, aWord, 1, nil, -1}
-		tokenArray = append(tokenArray, newNode)
-	}
-	return tokenArray
-}
-
-func processQueryTokens(tokens []magnagraph.Node) {
-
 }
 
 // Handlers for Magana
@@ -79,7 +60,7 @@ func queryHandler(w http.ResponseWriter, r *http.Request) {
 		panic(err)
 	}
 	fmt.Println(query)
-	queryTokens = tokenizeQuery(query)
+	queryTokens = magnalanguage.TokenizeQuery(query)
 	for _, aNode := range queryTokens {
 		magnalanguage.ProcessNode(aNode)
 	}

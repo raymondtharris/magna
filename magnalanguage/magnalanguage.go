@@ -6,6 +6,7 @@ import (
 	"strings"
 
 	"github.com/magna/magnagraph"
+	"regexp"
 )
 
 type MagnaQueryObject struct {
@@ -26,7 +27,7 @@ func IsImportant(aWord string) bool {
 	return false
 }
 
-func tokenizeQuery(queryObject MagnaQueryObject) []magnagraph.Node {
+func TokenizeQuery(queryObject MagnaQueryObject) []magnagraph.Node {
 	var tokenArray []magnagraph.Node
 	splitQueryString := strings.Split(queryObject.QueryString, " ")
 	for index, aWord := range splitQueryString {
