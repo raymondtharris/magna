@@ -21,6 +21,7 @@ func (mqo MagnaQueryObject) String() string {
 //const CommonDict = {"in", "a", "the", "of", "an"}
 func ProcessNode(aNode magnagraph.Node) {
 	fmt.Println(aNode.Value)
+
 }
 
 func IsImportant(aWord string) bool {
@@ -29,6 +30,7 @@ func IsImportant(aWord string) bool {
 
 func TokenizeQuery(queryObject MagnaQueryObject) []magnagraph.Node {
 	var tokenArray []magnagraph.Node
+	regexSpaces := regexp.MustCompile("[^A-z]")
 	splitQueryString := strings.Split(queryObject.QueryString, " ")
 	for index, aWord := range splitQueryString {
 		newNode := magnagraph.Node{index, aWord, 1, nil, -1}
