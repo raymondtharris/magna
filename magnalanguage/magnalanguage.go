@@ -31,10 +31,11 @@ func IsImportant(aWord string) bool {
 func TokenizeQuery(queryObject MagnaQueryObject) []magnagraph.Node {
 	var tokenArray []magnagraph.Node
 
-	regexSpaces := regexp.MustCompile("[^A-z]") //Find spaces
+	regexSpaces := regexp.MustCompile("[^A-z|']") //Find spaces
 	words := regexSpaces.ReplaceAllString(queryObject.QueryString, "\n")
-	fmt.Println(words)
-	splitQueryString := strings.Split(queryObject.QueryString, " ")
+	//fmt.Println(words)
+	splitQueryString := strings.Split(words, "\n")
+	fmt.Println(splitQueryString)
 	for index, aWord := range splitQueryString {
 		newNode := magnagraph.Node{index, aWord, 1, nil, -1}
 		tokenArray = append(tokenArray, newNode)
