@@ -24,6 +24,10 @@ func ProcessNode(aNode magnagraph.Node) {
 
 }
 
+func Categorize(aWord string) int {
+	return 0
+}
+
 func IsImportant(aWord string) bool {
 	return false
 }
@@ -41,4 +45,12 @@ func TokenizeQuery(queryObject MagnaQueryObject) []magnagraph.Node {
 		tokenArray = append(tokenArray, newNode)
 	}
 	return tokenArray
+}
+
+func BuildQuery(queryObject MagnaQueryObject) {
+
+}
+
+func ExecuteQuery(){
+	
 }
