@@ -5,8 +5,9 @@ import (
 	"old_magna/magna/magnauser"
 	"strings"
 
-	"github.com/magna/magnagraph"
 	"regexp"
+
+	"github.com/magna/magnagraph"
 )
 
 type MagnaQueryObject struct {
@@ -21,7 +22,7 @@ func (mqo MagnaQueryObject) String() string {
 //const CommonDict = {"in", "a", "the", "of", "an"}
 func ProcessNode(aNode magnagraph.Node) {
 	//fmt.Println(aNode.Value)
-
+	FindStem(aNode.Value)
 }
 
 func Categorize(aWord string) int {
@@ -30,6 +31,15 @@ func Categorize(aWord string) int {
 
 func IsImportant(aWord string) bool {
 	return false
+}
+
+func FindStem(aWord string) {
+	//Find ing stem
+	ingRegexp := regexp.MustCompile(".*[aeiou].*ing$")
+	if len(ingRegexp.FindAllString(aWord, 1)) > 0 {
+		stem := ingRegexp.ReplaceAllString(aWord, aWord[0:len(aWord)-3])
+		fmt.Println(stem)
+	}
 }
 
 func TokenizeQuery(queryObject MagnaQueryObject) []magnagraph.Node {
@@ -51,6 +61,6 @@ func BuildQuery(queryObject MagnaQueryObject) {
 
 }
 
-func ExecuteQuery(){
-	
+func ExecuteQuery() {
+
 }
