@@ -22,7 +22,7 @@ func (mqo MagnaQueryObject) String() string {
 //const CommonDict = {"in", "a", "the", "of", "an"}
 func ProcessNode(aNode magnagraph.Node) {
 	//fmt.Println(aNode.Value)
-	FindStem(aNode.Value)
+	aNode.Stem = FindStem(aNode.Value)
 }
 
 func Categorize(aWord string) int {
@@ -33,13 +33,15 @@ func IsImportant(aWord string) bool {
 	return false
 }
 
-func FindStem(aWord string) {
+func FindStem(aWord string) string {
 	//Find ing stem
 	ingRegexp := regexp.MustCompile(".*[aeiou].*ing$")
 	if len(ingRegexp.FindAllString(aWord, 1)) > 0 {
 		stem := ingRegexp.ReplaceAllString(aWord, aWord[0:len(aWord)-3])
 		fmt.Println(stem)
+		return stem
 	}
+	return aWord
 }
 
 func TokenizeQuery(queryObject MagnaQueryObject) []magnagraph.Node {
@@ -51,7 +53,7 @@ func TokenizeQuery(queryObject MagnaQueryObject) []magnagraph.Node {
 	splitQueryString := strings.Split(words, "\n")
 	fmt.Println(splitQueryString)
 	for index, aWord := range splitQueryString {
-		newNode := magnagraph.Node{index, aWord, 1, nil, -1}
+		newNode := magnagraph.Node{index, aWord, 1, nil, -1, ""}
 		tokenArray = append(tokenArray, newNode)
 	}
 	return tokenArray

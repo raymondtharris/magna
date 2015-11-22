@@ -40,6 +40,7 @@ type Node struct {
 	Weight      int        // Weight of the node in relation to the others
 	Neighbors   []Neighbor //Array of nodes connected to this particular node
 	ProcessType int        //Type given to each node
+	Stem        string
 }
 
 func (mNode Node) String() string {
