@@ -41,6 +41,11 @@ func FindStem(aWord string) string {
 		fmt.Println(stem)
 		return stem
 	}
+	edRegexp := regexp.MustCompile(".*[aeiou].*ed$")
+	if len(edRegexp.FindAllString(aWord, 1)) > 0 {
+		stem := edRegexp.ReplaceAllString(aWord, aWord[0:len(aWord)-2])
+		fmt.Println(stem)
+	}
 	return aWord
 }
 
