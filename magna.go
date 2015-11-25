@@ -13,6 +13,7 @@ import (
 
 //current query being processed
 var queryTokens []magnagraph.Node
+var stemString string
 
 //graph used to solve queries
 var magnasMind magnagraph.Graph
@@ -61,8 +62,10 @@ func queryHandler(w http.ResponseWriter, r *http.Request) {
 	}
 	fmt.Println(query)
 	queryTokens = magnalanguage.TokenizeQuery(query)
+	stemString = ""
 	for _, aNode := range queryTokens {
 		magnalanguage.ProcessNode(aNode)
+		magnalanguage.AppendToStemmedSring(stemString, aNode)
 	}
 }
 

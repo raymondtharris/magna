@@ -25,6 +25,10 @@ func ProcessNode(aNode magnagraph.Node) {
 	aNode.Stem = FindStem(aNode.Value)
 }
 
+func AppendToStemmedSring(stemString string, aNode magnagraph.Node) {
+	stemString = stemString + aNode.Stem + " "
+}
+
 func Categorize(aWord string) int {
 	return 0
 }
