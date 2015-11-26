@@ -35,16 +35,16 @@ func (mGraph Graph) String() string {
 
 //Node is something
 type Node struct {
-	Index       int        //Inex of the node
-	Value       string     //String value for the particular node
-	Weight      int        // Weight of the node in relation to the others
-	Neighbors   []Neighbor //Array of nodes connected to this particular node
-	ProcessType int        //Type given to each node
-	Stem        string
+	Index     int        //Inex of the node
+	Value     string     //String value for the particular node
+	Weight    int        // Weight of the node in relation to the others
+	Neighbors []Neighbor //Array of nodes connected to this particular node
+	Measure   int        // Measure of the word value
+	Stem      string     //Stem found from the word value.
 }
 
 func (mNode Node) String() string {
-	return fmt.Sprintf("Value: %v ProcessType: %v Weight: %v Neighbors: %v", mNode.Value, mNode.ProcessType, mNode.Weight, mNode.Neighbors)
+	return fmt.Sprintf("Value: %v ProcessType: %v Weight: %v Neighbors: %v", mNode.Value, mNode.Measure, mNode.Weight, mNode.Neighbors)
 }
 
 //Neighbor struct to store a node and the cost of the node

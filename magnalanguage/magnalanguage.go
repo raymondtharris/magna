@@ -43,19 +43,25 @@ func FindStem(aWord string) string {
 	if len(ingRegexp.FindAllString(aWord, 1)) > 0 {
 		stem := ingRegexp.ReplaceAllString(aWord, aWord[0:len(aWord)-3])
 		fmt.Println(stem)
-		return stem
+		FindStem(stem)
 	}
 	edRegexp := regexp.MustCompile(".*[aeiou].*ed$")
 	if len(edRegexp.FindAllString(aWord, 1)) > 0 {
 		stem := edRegexp.ReplaceAllString(aWord, aWord[0:len(aWord)-2])
 		fmt.Println(stem)
-		return stem
+		FindStem(stem)
 	}
 	lyRegexp := regexp.MustCompile(".*[aeiou].*ly$")
 	if len(lyRegexp.FindAllString(aWord, 1)) > 0 {
 		stem := lyRegexp.ReplaceAllString(aWord, aWord[0:len(aWord)-2])
 		fmt.Println(stem)
-		return stem
+		FindStem(stem)
+	}
+	ssesRegexp := regexp.MustCompile(".*sses$")
+	if len(ssesRegexp.FindAllString(aWord, 1)) > 0 {
+		stem := ssesRegexp.ReplaceAllString(aWord, aWord[0:len(aWord)-4]+"ss")
+		fmt.Println(stem)
+		FindStem(stem)
 	}
 	sRegexp := regexp.MustCompile(".*s$")
 	_ = sRegexp
