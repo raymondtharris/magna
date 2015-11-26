@@ -64,6 +64,10 @@ func FindStem(aWord string) string {
 	return aWord
 }
 
+//TokenizeQuery functions makes an array of Nodes that can be used with Magna's
+// graph to build a functional query. The function takes in a QueryObject and then
+// splits each word into a token. Those are then pushed into an array to be later
+// processed by the AI system.
 func TokenizeQuery(queryObject MagnaQueryObject) []magnagraph.Node {
 	var tokenArray []magnagraph.Node
 
