@@ -22,6 +22,7 @@ func (mqo MagnaQueryObject) String() string {
 //const CommonDict = {"in", "a", "the", "of", "an"}
 func ProcessNode(aNode magnagraph.Node) {
 	//fmt.Println(aNode.Value)
+	aNode.Measure = FindMeasure(aNode.Value)
 	aNode.Stem = FindStem(aNode.Value)
 }
 
@@ -35,6 +36,10 @@ func Categorize(aWord string) int {
 
 func IsImportant(aWord string) bool {
 	return false
+}
+
+func FindMeasure(aWord string) int {
+	return 0
 }
 
 func FindStem(aWord string) string {
@@ -63,11 +68,44 @@ func FindStem(aWord string) string {
 		fmt.Println(stem)
 		FindStem(stem)
 	}
+	ssRegexp := regexp.MustCompile(".*ss$")
+	if len(ssRegexp.FindAllString(aWord, 1)) > 1 {
+		stem := ssRegexp.ReplaceAllString(aWord, aWord[0:len(aWord)-2])
+		fmt.Println(stem)
+		FindStem(stem)
+	}
+
 	sRegexp := regexp.MustCompile(".*s$")
 	_ = sRegexp
 	esRegexp := regexp.MustCompile(".*es$")
 	_ = esRegexp
 	return aWord
+}
+
+func Porters(aWord string) string {
+	stem := aWord
+	ssesRegexp := regexp.MustCompile(".*sses$")
+	if len(ssesRegexp.FindAllString(stem, 1)) > 0 {
+		stem = ssesRegexp.ReplaceAllString(stem, stem[0:len(stem)-4]+"ss")
+		fmt.Println(stem)
+	}
+	iesRegexp := regexp.MustCompile(".*ies$")
+	if len(iesRegexp.FindAllString(stem, 1)) > 0 {
+		stem = iesRegexp.ReplaceAllString(stem, stem[0:len(stem)-3]+"i")
+		fmt.Println(stem)
+	}
+	ssRegexp := regexp.MustCompile(".*ss$")
+	if len(ssRegexp.FindAllString(stem, 1)) > 1 {
+		stem = ssRegexp.ReplaceAllString(stem, stem)
+		fmt.Println(stem)
+	}
+	sRegexp := regexp.MustCompile(".*s$")
+	if len(sRegexp.FindAllString(stem, 1)) > 1 {
+		stem = sRegexp.ReplaceAllString(stem, stem[0:len(stem)-1])
+		fmt.Println(stem)
+	}
+
+	return stem
 }
 
 //TokenizeQuery functions makes an array of Nodes that can be used with Magna's
