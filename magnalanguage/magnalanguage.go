@@ -104,6 +104,36 @@ func Porters(aWord string) string {
 		stem = sRegexp.ReplaceAllString(stem, stem[0:len(stem)-1])
 		fmt.Println(stem)
 	}
+	edRegexp := regexp.MustCompile(".*[aeiou].*ed$")
+	if len(edRegexp.FindAllString(stem, 1)) > 0 {
+		stem := edRegexp.ReplaceAllString(stem, stem[0:len(stem)-2])
+		fmt.Println(stem)
+		FindStem(stem)
+	}
+	ingRegexp := regexp.MustCompile(".*[aeiou].*ing$")
+	if len(ingRegexp.FindAllString(stem, 1)) > 0 {
+		stem := ingRegexp.ReplaceAllString(stem, aWord[0:len(stem)-3])
+		fmt.Println(stem)
+		FindStem(stem)
+	}
+	atRegexp := regexp.MustCompile(".*[aeiou].*at$")
+	if len(atRegexp.FindAllString(stem, 1)) > 0 {
+		stem := atRegexp.ReplaceAllString(stem, stem+"e")
+		fmt.Println(stem)
+		FindStem(stem)
+	}
+	blRegexp := regexp.MustCompile(".*[aeiou].*bl$")
+	if len(blRegexp.FindAllString(stem, 1)) > 0 {
+		stem := blRegexp.ReplaceAllString(stem, stem+"e")
+		fmt.Println(stem)
+		FindStem(stem)
+	}
+	izRegexp := regexp.MustCompile(".*[aeiou].*iz$")
+	if len(izRegexp.FindAllString(stem, 1)) > 0 {
+		stem := izRegexp.ReplaceAllString(stem, stem+"e")
+		fmt.Println(stem)
+		FindStem(stem)
+	}
 
 	return stem
 }
