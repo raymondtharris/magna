@@ -148,6 +148,19 @@ func Porters(aWord string) string {
 	return stem
 }
 
+func phaseOne(aStem string) string {
+	return aStem
+}
+func phaseTwo(aStem string) string {
+	return aStem
+}
+func phaseThree(aStem string) string {
+	return aStem
+}
+func phaseFour(aStem string) string {
+	return aStem
+}
+
 //TokenizeQuery functions makes an array of Nodes that can be used with Magna's
 // graph to build a functional query. The function takes in a QueryObject and then
 // splits each word into a token. Those are then pushed into an array to be later
