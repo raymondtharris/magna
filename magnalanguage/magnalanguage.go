@@ -84,26 +84,8 @@ func FindStem(aWord string) string {
 
 func Porters(aWord string) string {
 	stem := aWord
-	ssesRegexp := regexp.MustCompile(".*sses$")
-	if len(ssesRegexp.FindAllString(stem, 1)) > 0 {
-		stem = ssesRegexp.ReplaceAllString(stem, stem[0:len(stem)-4]+"ss")
-		fmt.Println(stem)
-	}
-	iesRegexp := regexp.MustCompile(".*ies$")
-	if len(iesRegexp.FindAllString(stem, 1)) > 0 {
-		stem = iesRegexp.ReplaceAllString(stem, stem[0:len(stem)-3]+"i")
-		fmt.Println(stem)
-	}
-	ssRegexp := regexp.MustCompile(".*ss$")
-	if len(ssRegexp.FindAllString(stem, 1)) > 1 {
-		stem = ssRegexp.ReplaceAllString(stem, stem)
-		fmt.Println(stem)
-	}
-	sRegexp := regexp.MustCompile(".*s$")
-	if len(sRegexp.FindAllString(stem, 1)) > 1 {
-		stem = sRegexp.ReplaceAllString(stem, stem[0:len(stem)-1])
-		fmt.Println(stem)
-	}
+	stem = phaseOne(stem)
+
 	edRegexp := regexp.MustCompile(".*[aeiou].*ed$")
 	if len(edRegexp.FindAllString(stem, 1)) > 0 {
 		stem := edRegexp.ReplaceAllString(stem, stem[0:len(stem)-2])
@@ -149,6 +131,26 @@ func Porters(aWord string) string {
 }
 
 func phaseOne(aStem string) string {
+	ssesRegexp := regexp.MustCompile(".*sses$")
+	if len(ssesRegexp.FindAllString(aStem, 1)) > 0 {
+		aStem = ssesRegexp.ReplaceAllString(aStem, aStem[0:len(aStem)-4]+"ss")
+		fmt.Println(aStem)
+	}
+	iesRegexp := regexp.MustCompile(".*ies$")
+	if len(iesRegexp.FindAllString(aStem, 1)) > 0 {
+		aStem = iesRegexp.ReplaceAllString(aStem, aStem[0:len(aStem)-3]+"i")
+		fmt.Println(aStem)
+	}
+	ssRegexp := regexp.MustCompile(".*ss$")
+	if len(ssRegexp.FindAllString(aStem, 1)) > 1 {
+		aStem = ssRegexp.ReplaceAllString(aStem, aStem)
+		fmt.Println(aStem)
+	}
+	sRegexp := regexp.MustCompile(".*s$")
+	if len(sRegexp.FindAllString(aStem, 1)) > 1 {
+		aStem = sRegexp.ReplaceAllString(aStem, aStem[0:len(aStem)-1])
+		fmt.Println(aStem)
+	}
 	return aStem
 }
 func phaseTwo(aStem string) string {
