@@ -75,57 +75,13 @@ func FindStem(aWord string) string {
 		FindStem(stem)
 	}
 
-	sRegexp := regexp.MustCompile(".*s$")
-	_ = sRegexp
-	esRegexp := regexp.MustCompile(".*es$")
-	_ = esRegexp
 	return aWord
 }
 
 func Porters(aWord string) string {
 	stem := aWord
 	stem = phaseOne(stem)
-
-	edRegexp := regexp.MustCompile(".*[aeiou].*ed$")
-	if len(edRegexp.FindAllString(stem, 1)) > 0 {
-		stem := edRegexp.ReplaceAllString(stem, stem[0:len(stem)-2])
-		fmt.Println(stem)
-	}
-	ingRegexp := regexp.MustCompile(".*[aeiou].*ing$")
-	if len(ingRegexp.FindAllString(stem, 1)) > 0 {
-		stem := ingRegexp.ReplaceAllString(stem, aWord[0:len(stem)-3])
-		fmt.Println(stem)
-	}
-	atRegexp := regexp.MustCompile(".*[aeiou].*at$")
-	if len(atRegexp.FindAllString(stem, 1)) > 0 {
-		stem := atRegexp.ReplaceAllString(stem, stem+"e")
-		fmt.Println(stem)
-	}
-	blRegexp := regexp.MustCompile(".*[aeiou].*bl$")
-	if len(blRegexp.FindAllString(stem, 1)) > 0 {
-		stem := blRegexp.ReplaceAllString(stem, stem+"e")
-		fmt.Println(stem)
-	}
-	izRegexp := regexp.MustCompile(".*[aeiou].*iz$")
-	if len(izRegexp.FindAllString(stem, 1)) > 0 {
-		stem := izRegexp.ReplaceAllString(stem, stem+"e")
-		fmt.Println(stem)
-	}
-	yRegexp := regexp.MustCompile(".*[aeiou].y$")
-	if len(yRegexp.FindAllString(stem, 1)) > 0 {
-		stem := yRegexp.ReplaceAllString(stem, stem[0:len(stem)-1]+"i")
-		fmt.Println(stem)
-	}
-	ationalRegexp := regexp.MustCompile(".*[aeiou].ational$")
-	if len(ationalRegexp.FindAllString(stem, 1)) > 0 {
-		stem := ationalRegexp.ReplaceAllString(stem, stem[0:len(stem)-7]+"ate")
-		fmt.Println(stem)
-	}
-	tionalRegexp := regexp.MustCompile(".*[aeiou].tional$")
-	if len(tionalRegexp.FindAllString(stem, 1)) > 0 {
-		stem := tionalRegexp.ReplaceAllString(stem, stem[0:len(stem)-6]+"tion")
-		fmt.Println(stem)
-	}
+	stem = phaseTwo(stem)
 
 	return stem
 }
@@ -151,9 +107,53 @@ func phaseOne(aStem string) string {
 		aStem = sRegexp.ReplaceAllString(aStem, aStem[0:len(aStem)-1])
 		fmt.Println(aStem)
 	}
+
+	edRegexp := regexp.MustCompile(".*[aeiou].*ed$")
+	if len(edRegexp.FindAllString(stem, 1)) > 0 {
+		stem := edRegexp.ReplaceAllString(stem, stem[0:len(stem)-2])
+		fmt.Println(stem)
+	}
+	ingRegexp := regexp.MustCompile(".*[aeiou].*ing$")
+	if len(ingRegexp.FindAllString(stem, 1)) > 0 {
+		stem := ingRegexp.ReplaceAllString(stem, aWord[0:len(stem)-3])
+		fmt.Println(stem)
+	}
+
+	atRegexp := regexp.MustCompile(".*[aeiou].*at$")
+	if len(atRegexp.FindAllString(stem, 1)) > 0 {
+		stem := atRegexp.ReplaceAllString(stem, stem+"e")
+		fmt.Println(stem)
+	}
+	blRegexp := regexp.MustCompile(".*[aeiou].*bl$")
+	if len(blRegexp.FindAllString(stem, 1)) > 0 {
+		stem := blRegexp.ReplaceAllString(stem, stem+"e")
+		fmt.Println(stem)
+	}
+	izRegexp := regexp.MustCompile(".*[aeiou].*iz$")
+	if len(izRegexp.FindAllString(stem, 1)) > 0 {
+		stem := izRegexp.ReplaceAllString(stem, stem+"e")
+		fmt.Println(stem)
+	}
+
+	yRegexp := regexp.MustCompile(".*[aeiou].y$")
+	if len(yRegexp.FindAllString(stem, 1)) > 0 {
+		stem := yRegexp.ReplaceAllString(stem, stem[0:len(stem)-1]+"i")
+		fmt.Println(stem)
+	}
+
 	return aStem
 }
 func phaseTwo(aStem string) string {
+	ationalRegexp := regexp.MustCompile(".*[aeiou].ational$")
+	if len(ationalRegexp.FindAllString(aStem, 1)) > 0 {
+		aStem := ationalRegexp.ReplaceAllString(aStem, aStem[0:len(aStem)-7]+"ate")
+		fmt.Println(aStem)
+	}
+	tionalRegexp := regexp.MustCompile(".*[aeiou].tional$")
+	if len(tionalRegexp.FindAllString(aStem, 1)) > 0 {
+		aStem := tionalRegexp.ReplaceAllString(aStem, aStem[0:len(aStem)-6]+"tion")
+		fmt.Println(aStem)
+	}
 	return aStem
 }
 func phaseThree(aStem string) string {
