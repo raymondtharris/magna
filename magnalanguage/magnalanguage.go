@@ -15,6 +15,9 @@ type MagnaQueryObject struct {
 	QueryString string
 }
 
+const vowelRegexp = "[aeiou|y]"
+const consanantRegexp = "^" + vowelRegexp
+
 func (mqo MagnaQueryObject) String() string {
 	return fmt.Sprintf("User: %v, Query: %v", mqo.User, mqo.QueryString)
 }
@@ -98,25 +101,32 @@ func phaseOne(aStem string) string {
 		fmt.Println(aStem)
 	}
 	ssRegexp := regexp.MustCompile(".*ss$")
-	if len(ssRegexp.FindAllString(aStem, 1)) > 1 {
+	if len(ssRegexp.FindAllString(aStem, 1)) > 0 {
 		aStem = ssRegexp.ReplaceAllString(aStem, aStem)
 		fmt.Println(aStem)
 	}
 	sRegexp := regexp.MustCompile(".*s$")
-	if len(sRegexp.FindAllString(aStem, 1)) > 1 {
+	if len(sRegexp.FindAllString(aStem, 1)) > 0 {
 		aStem = sRegexp.ReplaceAllString(aStem, aStem[0:len(aStem)-1])
 		fmt.Println(aStem)
 	}
-
-	edRegexp := regexp.MustCompile(".*[aeiou].*ed$")
-	if len(edRegexp.FindAllString(aStem, 1)) > 0 {
-		aStem := edRegexp.ReplaceAllString(aStem, aStem[0:len(aStem)-2])
+	p1aRegexp := regexp.MustCompile(consanantRegexp + ".*" + vowelRegexp + "eed$")
+	if len(p1aRegexp.FindAllString(aStem, 1)) > 0 {
+		aStem = p1aRegexp.ReplaceAllString(aStem, aStem[0:len(aStem)-3]+"ee")
 		fmt.Println(aStem)
 	}
-	ingRegexp := regexp.MustCompile(".*[aeiou].*ing$")
-	if len(ingRegexp.FindAllString(aStem, 1)) > 0 {
-		aStem := ingRegexp.ReplaceAllString(aStem, aStem[0:len(aStem)-3])
-		fmt.Println(aStem)
+	p1bRegexp := regexp.MustCompile(".*" + vowelRegexp + "(ed$|ing$)")
+	if len(p1bRegexp.FindAllString(aStem, 1)) > 0 {
+		edRegexp := regexp.MustCompile(".*[aeiou].*ed$")
+		if len(edRegexp.FindAllString(aStem, 1)) > 0 {
+			aStem := edRegexp.ReplaceAllString(aStem, aStem[0:len(aStem)-2])
+			fmt.Println(aStem)
+		}
+		ingRegexp := regexp.MustCompile(".*[aeiou].*ing$")
+		if len(ingRegexp.FindAllString(aStem, 1)) > 0 {
+			aStem := ingRegexp.ReplaceAllString(aStem, aStem[0:len(aStem)-3])
+			fmt.Println(aStem)
+		}
 	}
 
 	atRegexp := regexp.MustCompile(".*[aeiou].*at$")
