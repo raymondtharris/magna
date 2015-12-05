@@ -127,22 +127,23 @@ func phaseOne(aStem string) string {
 			aStem := ingRegexp.ReplaceAllString(aStem, aStem[0:len(aStem)-3])
 			fmt.Println(aStem)
 		}
-	}
 
-	atRegexp := regexp.MustCompile(".*[aeiou].*at$")
-	if len(atRegexp.FindAllString(aStem, 1)) > 0 {
-		aStem := atRegexp.ReplaceAllString(aStem, aStem+"e")
-		fmt.Println(aStem)
-	}
-	blRegexp := regexp.MustCompile(".*[aeiou].*bl$")
-	if len(blRegexp.FindAllString(aStem, 1)) > 0 {
-		aStem := blRegexp.ReplaceAllString(aStem, aStem+"e")
-		fmt.Println(aStem)
-	}
-	izRegexp := regexp.MustCompile(".*[aeiou].*iz$")
-	if len(izRegexp.FindAllString(aStem, 1)) > 0 {
-		aStem := izRegexp.ReplaceAllString(aStem, aStem+"e")
-		fmt.Println(aStem)
+		atRegexp := regexp.MustCompile(".*[aeiou].*at$")
+		if len(atRegexp.FindAllString(aStem, 1)) > 0 {
+			aStem := atRegexp.ReplaceAllString(aStem, aStem+"e")
+			fmt.Println(aStem)
+		}
+		blRegexp := regexp.MustCompile(".*[aeiou].*bl$")
+		if len(blRegexp.FindAllString(aStem, 1)) > 0 {
+			aStem := blRegexp.ReplaceAllString(aStem, aStem+"e")
+			fmt.Println(aStem)
+		}
+		izRegexp := regexp.MustCompile(".*[aeiou].*iz$")
+		if len(izRegexp.FindAllString(aStem, 1)) > 0 {
+			aStem := izRegexp.ReplaceAllString(aStem, aStem+"e")
+			fmt.Println(aStem)
+		}
+
 	}
 
 	yRegexp := regexp.MustCompile(".*[aeiou].y$")
