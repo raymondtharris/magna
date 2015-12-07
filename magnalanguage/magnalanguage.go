@@ -26,7 +26,7 @@ func (mqo MagnaQueryObject) String() string {
 func ProcessNode(aNode magnagraph.Node) {
 	//fmt.Println(aNode.Value)
 	aNode.Measure = FindMeasure(aNode.Value)
-	aNode.Stem = FindStem(aNode.Value)
+	aNode.Stem = Porters(aNode.Value)
 }
 
 func AppendToStemmedSring(stemString string, aNode magnagraph.Node) {
@@ -45,46 +45,12 @@ func FindMeasure(aWord string) int {
 	return 0
 }
 
-func FindStem(aWord string) string {
-	//Find ing stem
-	ingRegexp := regexp.MustCompile(".*[aeiou].*ing$")
-	if len(ingRegexp.FindAllString(aWord, 1)) > 0 {
-		stem := ingRegexp.ReplaceAllString(aWord, aWord[0:len(aWord)-3])
-		fmt.Println(stem)
-		FindStem(stem)
-	}
-	edRegexp := regexp.MustCompile(".*[aeiou].*ed$")
-	if len(edRegexp.FindAllString(aWord, 1)) > 0 {
-		stem := edRegexp.ReplaceAllString(aWord, aWord[0:len(aWord)-2])
-		fmt.Println(stem)
-		FindStem(stem)
-	}
-	lyRegexp := regexp.MustCompile(".*[aeiou].*ly$")
-	if len(lyRegexp.FindAllString(aWord, 1)) > 0 {
-		stem := lyRegexp.ReplaceAllString(aWord, aWord[0:len(aWord)-2])
-		fmt.Println(stem)
-		FindStem(stem)
-	}
-	ssesRegexp := regexp.MustCompile(".*sses$")
-	if len(ssesRegexp.FindAllString(aWord, 1)) > 0 {
-		stem := ssesRegexp.ReplaceAllString(aWord, aWord[0:len(aWord)-4]+"ss")
-		fmt.Println(stem)
-		FindStem(stem)
-	}
-	ssRegexp := regexp.MustCompile(".*ss$")
-	if len(ssRegexp.FindAllString(aWord, 1)) > 1 {
-		stem := ssRegexp.ReplaceAllString(aWord, aWord[0:len(aWord)-2])
-		fmt.Println(stem)
-		FindStem(stem)
-	}
-
-	return aWord
-}
-
 func Porters(aWord string) string {
 	stem := aWord
 	stem = phaseOne(stem)
 	stem = phaseTwo(stem)
+	stem = phaseThree(stem)
+	stem = phaseFour(stem)
 
 	return stem
 }
@@ -259,6 +225,42 @@ func phaseTwo(aStem string) string {
 	return aStem
 }
 func phaseThree(aStem string) string {
+	icateRegexp := regexp.MustCompile(".*[aeiou].icate$")
+	if len(icateRegexp.FindAllString(aStem, 1)) > 0 {
+		aStem := icateRegexp.ReplaceAllString(aStem, aStem[0:len(aStem)-5]+"ic")
+		fmt.Println(aStem)
+	}
+	ativeRegexp := regexp.MustCompile(".*[aeiou].ative$")
+	if len(ativeRegexp.FindAllString(aStem, 1)) > 0 {
+		aStem := ativeRegexp.ReplaceAllString(aStem, aStem[0:len(aStem)-5])
+		fmt.Println(aStem)
+	}
+	alizeRegexp := regexp.MustCompile(".*[aeiou].alize$")
+	if len(alizeRegexp.FindAllString(aStem, 1)) > 0 {
+		aStem := alizeRegexp.ReplaceAllString(aStem, aStem[0:len(aStem)-5]+"al")
+		fmt.Println(aStem)
+	}
+	icitiRegexp := regexp.MustCompile(".*[aeiou].iciti$")
+	if len(icitiRegexp.FindAllString(aStem, 1)) > 0 {
+		aStem := icitiRegexp.ReplaceAllString(aStem, aStem[0:len(aStem)-5]+"ic")
+		fmt.Println(aStem)
+	}
+	icalRegexp := regexp.MustCompile(".*[aeiou].ical$")
+	if len(icalRegexp.FindAllString(aStem, 1)) > 0 {
+		aStem := icalRegexp.ReplaceAllString(aStem, aStem[0:len(aStem)-4]+"ic")
+		fmt.Println(aStem)
+	}
+	fulRegexp := regexp.MustCompile(".*[aeiou].ful$")
+	if len(fulRegexp.FindAllString(aStem, 1)) > 0 {
+		aStem := fulRegexp.ReplaceAllString(aStem, aStem[0:len(aStem)-3])
+		fmt.Println(aStem)
+	}
+	nessRegexp := regexp.MustCompile(".*[aeiou].ness$")
+	if len(nessRegexp.FindAllString(aStem, 1)) > 0 {
+		aStem := nessRegexp.ReplaceAllString(aStem, aStem[0:len(aStem)-4])
+		fmt.Println(aStem)
+	}
+
 	return aStem
 }
 func phaseFour(aStem string) string {
