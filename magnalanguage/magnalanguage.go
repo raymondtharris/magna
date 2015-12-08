@@ -264,6 +264,29 @@ func phaseThree(aStem string) string {
 	return aStem
 }
 func phaseFour(aStem string) string {
+	alRegexp := regexp.MustCompile(".*[aeiou].al$")
+	if len(alRegexp.FindAllString(aStem, 1)) > 0 {
+		aStem := alRegexp.ReplaceAllString(aStem, aStem[0:len(aStem)-2])
+		fmt.Println(aStem)
+	}
+	anceRegexp := regexp.MustCompile(".*[aeiou].ance$")
+	if len(anceRegexp.FindAllString(aStem, 1)) > 0 {
+		aStem := anceRegexp.ReplaceAllString(aStem, aStem[0:len(aStem)-4])
+		fmt.Println(aStem)
+	}
+	enceRegexp := regexp.MustCompile(".*[aeiou].ence$")
+	if len(enceRegexp.FindAllString(aStem, 1)) > 0 {
+		aStem := enceRegexp.ReplaceAllString(aStem, aStem[0:len(aStem)-4])
+		fmt.Println(aStem)
+	}
+	erRegexp := regexp.MustCompile(".*[aeiou].er$")
+	if len(erRegexp.FindAllString(aStem, 1)) > 0 {
+		aStem := erRegexp.ReplaceAllString(aStem, aStem[0:len(aStem)-2])
+		fmt.Println(aStem)
+	}
+	return aStem
+}
+func phaseFive(aStem string) string {
 	return aStem
 }
 
