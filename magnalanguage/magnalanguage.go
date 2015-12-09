@@ -284,6 +284,58 @@ func phaseFour(aStem string) string {
 		aStem := erRegexp.ReplaceAllString(aStem, aStem[0:len(aStem)-2])
 		fmt.Println(aStem)
 	}
+	icRegexp := regexp.MustCompile(".*[aeiou].ic$")
+	if len(icRegexp.FindAllString(aStem, 1)) > 0 {
+		aStem := icRegexp.ReplaceAllString(aStem, aStem[0:len(aStem)-2])
+		fmt.Println(aStem)
+	}
+	ableRegexp := regexp.MustCompile(".*[aeiou].able$")
+	if len(ableRegexp.FindAllString(aStem, 1)) > 0 {
+		aStem := ableRegexp.ReplaceAllString(aStem, aStem[0:len(aStem)-4])
+		fmt.Println(aStem)
+	}
+	ibleRegexp := regexp.MustCompile(".*[aeiou].ible$")
+	if len(ibleRegexp.FindAllString(aStem, 1)) > 0 {
+		aStem := ibleRegexp.ReplaceAllString(aStem, aStem[0:len(aStem)-4])
+		fmt.Println(aStem)
+	}
+	antRegexp := regexp.MustCompile(".*[aeiou].ant$")
+	if len(antRegexp.FindAllString(aStem, 1)) > 0 {
+		aStem := antRegexp.ReplaceAllString(aStem, aStem[0:len(aStem)-3])
+		fmt.Println(aStem)
+	}
+	ementRegexp := regexp.MustCompile(".*[aeiou].ement$")
+	if len(ementRegexp.FindAllString(aStem, 1)) > 0 {
+		aStem := ementRegexp.ReplaceAllString(aStem, aStem[0:len(aStem)-5])
+		fmt.Println(aStem)
+	}
+	mentRegexp := regexp.MustCompile(".*[aeiou].ment$")
+	if len(mentRegexp.FindAllString(aStem, 1)) > 0 {
+		aStem := mentRegexp.ReplaceAllString(aStem, aStem[0:len(aStem)-4])
+		fmt.Println(aStem)
+	}
+	entRegexp := regexp.MustCompile(".*[aeiou].ent$")
+	if len(entRegexp.FindAllString(aStem, 1)) > 0 {
+		aStem := entRegexp.ReplaceAllString(aStem, aStem[0:len(aStem)-3])
+		fmt.Println(aStem)
+	}
+
+	s_tionRegexp := regexp.MustCompile(".*[aeiou].[s|t]ion$")
+	if len(s_tionRegexp.FindAllString(aStem, 1)) > 0 {
+		aStem := s_tionRegexp.ReplaceAllString(aStem, aStem[0:len(aStem)-4])
+		fmt.Println(aStem)
+	}
+	ouRegexp := regexp.MustCompile(".*[aeiou].ou$")
+	if len(ouRegexp.FindAllString(aStem, 1)) > 0 {
+		aStem := ouRegexp.ReplaceAllString(aStem, aStem[0:len(aStem)-2])
+		fmt.Println(aStem)
+	}
+	ismRegexp := regexp.MustCompile(".*[aeiou].ism$")
+	if len(ismRegexp.FindAllString(aStem, 1)) > 0 {
+		aStem := ismRegexp.ReplaceAllString(aStem, aStem[0:len(aStem)-3])
+		fmt.Println(aStem)
+	}
+
 	return aStem
 }
 func phaseFive(aStem string) string {
