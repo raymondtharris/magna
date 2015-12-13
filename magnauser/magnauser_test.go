@@ -5,6 +5,6 @@ import(
   "testing"
 )
 
-func TestQueryReceiving(t *testing.T){
+func TestUser(t *testing.T){
 
 }
