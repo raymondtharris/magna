@@ -38,6 +38,13 @@ func TestQueue(t *testing.T){
     aQueue.Enqueue(*qnode)
   }
   fmt.Println(aQueue)
+  fmt.Print(aQueue.Length)
+  for !aQueue.isEmpty {
+    aQueue.Dequeue()
+    fmt.Println(aQueue)
+  }
+  fmt.Println(aQueue)
+  fmt.Print(aQueue.Length)
 }
 
 
