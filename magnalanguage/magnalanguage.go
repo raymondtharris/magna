@@ -335,6 +335,31 @@ func phaseFour(aStem string) string {
 		aStem := ismRegexp.ReplaceAllString(aStem, aStem[0:len(aStem)-3])
 		fmt.Println(aStem)
 	}
+	ateRegexp := regexp.MustCompile(".*[aeiou].ate$")
+	if len(ateRegexp.FindAllString(aStem, 1)) > 0 {
+		aStem := ateRegexp.ReplaceAllString(aStem, aStem[0:len(aStem)-3])
+		fmt.Println(aStem)
+	}
+	itiRegexp := regexp.MustCompile(".*[aeiou].iti$")
+	if len(itiRegexp.FindAllString(aStem, 1)) > 0 {
+		aStem := itiRegexp.ReplaceAllString(aStem, aStem[0:len(aStem)-3])
+		fmt.Println(aStem)
+	}
+	ousRegexp := regexp.MustCompile(".*[aeiou].ous$")
+	if len(ousRegexp.FindAllString(aStem, 1)) > 0 {
+		aStem := ousRegexp.ReplaceAllString(aStem, aStem[0:len(aStem)-3])
+		fmt.Println(aStem)
+	}
+	iveRegexp := regexp.MustCompile(".*[aeiou].ive$")
+	if len(iveRegexp.FindAllString(aStem, 1)) > 0 {
+		aStem := iveRegexp.ReplaceAllString(aStem, aStem[0:len(aStem)-3])
+		fmt.Println(aStem)
+	}
+	izeRegexp := regexp.MustCompile(".*[aeiou].ize$")
+	if len(izeRegexp.FindAllString(aStem, 1)) > 0 {
+		aStem := izeRegexp.ReplaceAllString(aStem, aStem[0:len(aStem)-3])
+		fmt.Println(aStem)
+	}
 
 	return aStem
 }
