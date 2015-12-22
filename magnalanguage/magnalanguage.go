@@ -26,7 +26,7 @@ func (mqo MagnaQueryObject) String() string {
 func ProcessNode(aNode magnagraph.Node) {
 	//fmt.Println(aNode.Value)
 	aNode.Measure = FindMeasure(aNode.Value)
-	aNode.Stem = Porters(aNode.Value)
+	aNode.Stem = Porters(aNode.Value, aNode.Measure)
 }
 
 func AppendToStemmedSring(stemString string, aNode magnagraph.Node) {
@@ -45,17 +45,18 @@ func FindMeasure(aWord string) int {
 	return 0
 }
 
-func Porters(aWord string) string {
+func Porters(aWord string, wordMeasure int) string {
 	stem := aWord
-	stem = phaseOne(stem)
-	stem = phaseTwo(stem)
-	stem = phaseThree(stem)
-	stem = phaseFour(stem)
+	stem = phaseOne(stem, wordMeasure)
+	stem = phaseTwo(stem, wordMeasure)
+	stem = phaseThree(stem, wordMeasure)
+	stem = phaseFour(stem, wordMeasure)
+	stem = phaseFive(stem, wordMeasure)
 
 	return stem
 }
 
-func phaseOne(aStem string) string {
+func phaseOne(aStem string, wordMeasure int) string {
 	ssesRegexp := regexp.MustCompile(".*sses$")
 	if len(ssesRegexp.FindAllString(aStem, 1)) > 0 {
 		aStem = ssesRegexp.ReplaceAllString(aStem, aStem[0:len(aStem)-4]+"ss")
@@ -120,7 +121,7 @@ func phaseOne(aStem string) string {
 
 	return aStem
 }
-func phaseTwo(aStem string) string {
+func phaseTwo(aStem string, wordMeasure int) string {
 	ationalRegexp := regexp.MustCompile(".*[aeiou].ational$")
 	if len(ationalRegexp.FindAllString(aStem, 1)) > 0 {
 		aStem := ationalRegexp.ReplaceAllString(aStem, aStem[0:len(aStem)-7]+"ate")
@@ -224,7 +225,7 @@ func phaseTwo(aStem string) string {
 
 	return aStem
 }
-func phaseThree(aStem string) string {
+func phaseThree(aStem string, wordMeasure int) string {
 	icateRegexp := regexp.MustCompile(".*[aeiou].icate$")
 	if len(icateRegexp.FindAllString(aStem, 1)) > 0 {
 		aStem := icateRegexp.ReplaceAllString(aStem, aStem[0:len(aStem)-5]+"ic")
@@ -263,7 +264,7 @@ func phaseThree(aStem string) string {
 
 	return aStem
 }
-func phaseFour(aStem string) string {
+func phaseFour(aStem string, wordMeasure int) string {
 	alRegexp := regexp.MustCompile(".*[aeiou].al$")
 	if len(alRegexp.FindAllString(aStem, 1)) > 0 {
 		aStem := alRegexp.ReplaceAllString(aStem, aStem[0:len(aStem)-2])
@@ -363,7 +364,7 @@ func phaseFour(aStem string) string {
 
 	return aStem
 }
-func phaseFive(aStem string) string {
+func phaseFive(aStem string, wordMeasure int) string {
 	eRegexp := regexp.MustCompile(".*[aeiou].e$")
 	if len(eRegexp.FindAllString(aStem, 1)) > 0 {
 		aStem := eRegexp.ReplaceAllString(aStem, aStem[0:len(aStem)-1])
