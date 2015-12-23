@@ -13,7 +13,12 @@ func TestPorters(t *testing.T){
   //run words through Porters
 
 }
+func TestMeasure(t *testing.T){
+  words := string[]{"the", "world", "farther", "places", "trusting", "higher", "max", "light"}
+  for _, aWord := range words {
 
+  }
+}
 func TestTokenize(t *testing.T){
 
 }

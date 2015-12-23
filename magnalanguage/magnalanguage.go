@@ -42,7 +42,10 @@ func IsImportant(aWord string) bool {
 }
 
 func FindMeasure(aWord string) int {
-	return 0
+	measureRegexp := regexp.MustCompile("[aeiou][^aeiou]")
+	aMeasure := len(measureRegexp,FindAllString(aWord, 1))
+	fmt.Println(aMeasure)
+	return aMeasure
 }
 
 func Porters(aWord string, wordMeasure int) string {
