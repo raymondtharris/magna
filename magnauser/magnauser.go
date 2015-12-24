@@ -1,4 +1,4 @@
-package magnauser
+package main 
 
 import (
 	"fmt"

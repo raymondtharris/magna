@@ -14,9 +14,10 @@ func TestPorters(t *testing.T){
 
 }
 func TestMeasure(t *testing.T){
-  words := string[]{"the", "world", "farther", "places", "trusting", "higher", "max", "light"}
+  words := []string{"the", "world", "farther", "places", "trusting", "higher", "max", "light"}
   for _, aWord := range words {
-
+    meas := FindMeasure(aWord)
+    fmt.Println(aWord + " measure: "+ meas)
   }
 }
 func TestTokenize(t *testing.T){

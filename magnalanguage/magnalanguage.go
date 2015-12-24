@@ -1,4 +1,4 @@
-package magnalanguage
+package main
 
 import (
 	"fmt"
@@ -407,4 +407,7 @@ func BuildQuery(queryObject MagnaQueryObject) {
 
 func ExecuteQuery() {
 
+}
+func main() {
+	
 }
