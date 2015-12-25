@@ -1,4 +1,4 @@
-package main 
+package main
 
 import (
 	"fmt"
@@ -21,4 +21,7 @@ type Interest struct {
 
 func (mInterest Interest) String() string {
 	return fmt.Sprintf("%v", mInterest.Name)
+}
+func main() {
+	
 }

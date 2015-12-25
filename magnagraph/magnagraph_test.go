@@ -1,4 +1,4 @@
-package main
+package magnagraph_test
 
 import(
   "fmt"

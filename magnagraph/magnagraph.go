@@ -1,4 +1,4 @@
-package main
+package magnagraph
 import "fmt"
 
 const (
@@ -214,7 +214,4 @@ func (mQueue queue) Search(nodeToFind *Node) *node {
 
 	}
 	return nil
-}
-func main() {
-	
 }

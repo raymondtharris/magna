@@ -1,4 +1,4 @@
-package main
+package  magnalanguage
 
 import (
 	"fmt"
@@ -43,7 +43,7 @@ func IsImportant(aWord string) bool {
 
 func FindMeasure(aWord string) int {
 	measureRegexp := regexp.MustCompile("[aeiou][^aeiou]")
-	aMeasure := len(measureRegexp,FindAllString(aWord, 1))
+	aMeasure := len(measureRegexp.FindAllString(aWord, -1))
 	fmt.Println(aMeasure)
 	return aMeasure
 }
@@ -410,8 +410,5 @@ func BuildQuery(queryObject MagnaQueryObject) {
 }
 
 func ExecuteQuery() {
-
-}
-func main() {
 
 }
