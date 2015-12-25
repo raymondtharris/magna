@@ -1,4 +1,4 @@
-package main
+package magnaio
 import (
   //"fmt"
   "bufio"
@@ -28,7 +28,4 @@ func ReadInput() string {
 
 func ErrorDisplay() string {
   return ""
-}
-func main() {
-
 }
