@@ -44,7 +44,7 @@ func IsImportant(aWord string) bool {
 func FindMeasure(aWord string) int {
 	measureRegexp := regexp.MustCompile("[aeiou][^aeiou]")
 	aMeasure := len(measureRegexp.FindAllString(aWord, -1))
-	fmt.Println(aMeasure)
+	//fmt.Println(aMeasure)
 	return aMeasure
 }
 
@@ -86,7 +86,7 @@ func phaseOne(aStem string, wordMeasure int) string {
 		aStem = p1aRegexp.ReplaceAllString(aStem, aStem[0:len(aStem)-3]+"ee")
 		fmt.Println(aStem)
 	}
-	p1bRegexp := regexp.MustCompile(".*" + vowelRegexp + "(ed$|ing$)")
+	p1bRegexp := regexp.MustCompile(".*[aeiou]*(ed$|ing$)")
 	if len(p1bRegexp.FindAllString(aStem, 1)) > 0 {
 		edRegexp := regexp.MustCompile(".*[aeiou].*ed$")
 		if len(edRegexp.FindAllString(aStem, 1)) > 0 {
@@ -271,99 +271,100 @@ func phaseThree(aStem string, wordMeasure int) string {
 	return aStem
 }
 func phaseFour(aStem string, wordMeasure int) string {
+
 	if wordMeasure > 1 {
-		alRegexp := regexp.MustCompile(".*[aeiou].al$")
+		alRegexp := regexp.MustCompile(".*[aeiou].*al$")
 		if len(alRegexp.FindAllString(aStem, 1)) > 0 {
 			aStem := alRegexp.ReplaceAllString(aStem, aStem[0:len(aStem)-2])
 			fmt.Println(aStem)
 		}
-		anceRegexp := regexp.MustCompile(".*[aeiou].ance$")
+		anceRegexp := regexp.MustCompile(".*[aeiou].*ance$")
 		if len(anceRegexp.FindAllString(aStem, 1)) > 0 {
 			aStem := anceRegexp.ReplaceAllString(aStem, aStem[0:len(aStem)-4])
 			fmt.Println(aStem)
 		}
-		enceRegexp := regexp.MustCompile(".*[aeiou].ence$")
+		enceRegexp := regexp.MustCompile(".*[aeiou].*ence$")
 		if len(enceRegexp.FindAllString(aStem, 1)) > 0 {
 			aStem := enceRegexp.ReplaceAllString(aStem, aStem[0:len(aStem)-4])
 			fmt.Println(aStem)
 		}
-		erRegexp := regexp.MustCompile(".*[aeiou].er$")
+		erRegexp := regexp.MustCompile(".*[aeiou].*er$")
 		if len(erRegexp.FindAllString(aStem, 1)) > 0 {
 			aStem := erRegexp.ReplaceAllString(aStem, aStem[0:len(aStem)-2])
 			fmt.Println(aStem)
 		}
-		icRegexp := regexp.MustCompile(".*[aeiou].ic$")
+		icRegexp := regexp.MustCompile(".*[aeiou].*ic$")
 		if len(icRegexp.FindAllString(aStem, 1)) > 0 {
 			aStem := icRegexp.ReplaceAllString(aStem, aStem[0:len(aStem)-2])
 			fmt.Println(aStem)
 		}
-		ableRegexp := regexp.MustCompile(".*[aeiou].able$")
+		ableRegexp := regexp.MustCompile(".*[aeiou].*able$")
 		if len(ableRegexp.FindAllString(aStem, 1)) > 0 {
 			aStem := ableRegexp.ReplaceAllString(aStem, aStem[0:len(aStem)-4])
 			fmt.Println(aStem)
 		}
-		ibleRegexp := regexp.MustCompile(".*[aeiou].ible$")
+		ibleRegexp := regexp.MustCompile(".*[aeiou].*ible$")
 		if len(ibleRegexp.FindAllString(aStem, 1)) > 0 {
 			aStem := ibleRegexp.ReplaceAllString(aStem, aStem[0:len(aStem)-4])
 			fmt.Println(aStem)
 		}
-		antRegexp := regexp.MustCompile(".*[aeiou].ant$")
+		antRegexp := regexp.MustCompile(".*[aeiou].*ant$")
 		if len(antRegexp.FindAllString(aStem, 1)) > 0 {
 			aStem := antRegexp.ReplaceAllString(aStem, aStem[0:len(aStem)-3])
 			fmt.Println(aStem)
 		}
-		ementRegexp := regexp.MustCompile(".*[aeiou].ement$")
+		ementRegexp := regexp.MustCompile(".*[aeiou].*ement$")
 		if len(ementRegexp.FindAllString(aStem, 1)) > 0 {
 			aStem := ementRegexp.ReplaceAllString(aStem, aStem[0:len(aStem)-5])
 			fmt.Println(aStem)
 		}
-		mentRegexp := regexp.MustCompile(".*[aeiou].ment$")
+		mentRegexp := regexp.MustCompile(".*[aeiou].*ment$")
 		if len(mentRegexp.FindAllString(aStem, 1)) > 0 {
 			aStem := mentRegexp.ReplaceAllString(aStem, aStem[0:len(aStem)-4])
 			fmt.Println(aStem)
 		}
-		entRegexp := regexp.MustCompile(".*[aeiou].ent$")
+		entRegexp := regexp.MustCompile(".*[aeiou].*ent$")
 		if len(entRegexp.FindAllString(aStem, 1)) > 0 {
 			aStem := entRegexp.ReplaceAllString(aStem, aStem[0:len(aStem)-3])
 			fmt.Println(aStem)
 		}
 
-		s_tionRegexp := regexp.MustCompile(".*[aeiou].[s|t]ion$")
+		s_tionRegexp := regexp.MustCompile(".*[aeiou].*[s|t]ion$")
 		if len(s_tionRegexp.FindAllString(aStem, 1)) > 0 {
 			aStem := s_tionRegexp.ReplaceAllString(aStem, aStem[0:len(aStem)-4])
 			fmt.Println(aStem)
 		}
-		ouRegexp := regexp.MustCompile(".*[aeiou].ou$")
+		ouRegexp := regexp.MustCompile(".*[aeiou].*ou$")
 		if len(ouRegexp.FindAllString(aStem, 1)) > 0 {
 			aStem := ouRegexp.ReplaceAllString(aStem, aStem[0:len(aStem)-2])
 			fmt.Println(aStem)
 		}
-		ismRegexp := regexp.MustCompile(".*[aeiou].ism$")
+		ismRegexp := regexp.MustCompile(".*[aeiou].*ism$")
 		if len(ismRegexp.FindAllString(aStem, 1)) > 0 {
 			aStem := ismRegexp.ReplaceAllString(aStem, aStem[0:len(aStem)-3])
 			fmt.Println(aStem)
 		}
-		ateRegexp := regexp.MustCompile(".*[aeiou].ate$")
+		ateRegexp := regexp.MustCompile(".*[aeiou].*ate$")
 		if len(ateRegexp.FindAllString(aStem, 1)) > 0 {
 			aStem := ateRegexp.ReplaceAllString(aStem, aStem[0:len(aStem)-3])
 			fmt.Println(aStem)
 		}
-		itiRegexp := regexp.MustCompile(".*[aeiou].iti$")
+		itiRegexp := regexp.MustCompile(".*[aeiou].*iti$")
 		if len(itiRegexp.FindAllString(aStem, 1)) > 0 {
 			aStem := itiRegexp.ReplaceAllString(aStem, aStem[0:len(aStem)-3])
 			fmt.Println(aStem)
 		}
-		ousRegexp := regexp.MustCompile(".*[aeiou].ous$")
+		ousRegexp := regexp.MustCompile(".*[aeiou].*ous$")
 		if len(ousRegexp.FindAllString(aStem, 1)) > 0 {
 			aStem := ousRegexp.ReplaceAllString(aStem, aStem[0:len(aStem)-3])
 			fmt.Println(aStem)
 		}
-		iveRegexp := regexp.MustCompile(".*[aeiou].ive$")
+		iveRegexp := regexp.MustCompile(".*[aeiou].*ive$")
 		if len(iveRegexp.FindAllString(aStem, 1)) > 0 {
 			aStem := iveRegexp.ReplaceAllString(aStem, aStem[0:len(aStem)-3])
 			fmt.Println(aStem)
 		}
-		izeRegexp := regexp.MustCompile(".*[aeiou].ize$")
+		izeRegexp := regexp.MustCompile(".*[aeiou].*ize$")
 		if len(izeRegexp.FindAllString(aStem, 1)) > 0 {
 			aStem := izeRegexp.ReplaceAllString(aStem, aStem[0:len(aStem)-3])
 			fmt.Println(aStem)

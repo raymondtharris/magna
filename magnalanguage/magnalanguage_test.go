@@ -13,7 +13,12 @@ func TestPorters(t *testing.T){
   //Read file
   // split words
   //run words through Porters
-
+  words := []string{"the", "world", "farther", "places", "trusting", "higher", "max", "light"}
+  for _, aWord := range words {
+    meas := FindMeasure(aWord)
+    stem := Porters(aWord, meas)
+    fmt.Println("word " + aWord + " stem " + stem + " measure " + strconv.Itoa(meas))
+  }
 }
 func TestMeasure(t *testing.T){
   words := []string{"the", "world", "farther", "places", "trusting", "higher", "max", "light"}
