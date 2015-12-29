@@ -117,7 +117,7 @@ func phaseOne(aStem string, wordMeasure int) string {
 
 	}
 
-	yRegexp := regexp.MustCompile(".*[aeiou].*y$")
+	yRegexp := regexp.MustCompile(".*[^aeiou]y$")
 	if len(yRegexp.FindAllString(aStem, 1)) > 0 {
 		aStem = yRegexp.ReplaceAllString(aStem, aStem[0:len(aStem)-1]+"i")
 		fmt.Println(aStem)
@@ -373,15 +373,27 @@ func phaseFour(aStem string, wordMeasure int) string {
 	return aStem
 }
 func phaseFive(aStem string, wordMeasure int) string {
-	eRegexp := regexp.MustCompile(".*[aeiou].e$")
-	if len(eRegexp.FindAllString(aStem, 1)) > 0 {
-		aStem = eRegexp.ReplaceAllString(aStem, aStem[0:len(aStem)-1])
-		fmt.Println(aStem)
+	if wordMeasure > 1 {
+		eRegexp := regexp.MustCompile(".*[aeiou].*e$")
+		if len(eRegexp.FindAllString(aStem, 1)) > 0 {
+			aStem = eRegexp.ReplaceAllString(aStem, aStem[0:len(aStem)-1])
+			fmt.Println(aStem)
+		}
 	}
-	lRegexp := regexp.MustCompile(".*[aeiou].l$")
-	if len(lRegexp.FindAllString(aStem, 1)) > 0 {
-		aStem = lRegexp.ReplaceAllString(aStem, aStem[0:len(aStem)-1])
-		fmt.Println(aStem)
+	if wordMeasure == 1 {
+		eRegexp := regexp.MustCompile(".*[aeiou].*[^o]e$")
+		if len(eRegexp.FindAllString(aStem, 1)) > 0 {
+			aStem = eRegexp.ReplaceAllString(aStem, aStem[0:len(aStem)-1])
+			fmt.Println(aStem)
+		}
+	}
+	if wordMeasure > 1 {
+		lRegexp := regexp.MustCompile(".*[aeiou].*([^dL])$")
+		//find second to last letter and see if they match the last letter if true
+		if len(lRegexp.FindAllString(aStem, 1)) > 0 {
+			aStem = lRegexp.ReplaceAllString(aStem, aStem[0:len(aStem)-1])
+			fmt.Println(aStem)
+		}
 	}
 
 	return aStem
