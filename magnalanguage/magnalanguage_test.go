@@ -13,7 +13,7 @@ func TestPorters(t *testing.T){
   //Read file
   // split words
   //run words through Porters
-  words := []string{"the", "world", "farther", "places", "trusting", "higher", "max", "light", "hockey", "fly", "ally"}
+  words := []string{"the", "world", "farther", "places", "trusting", "higher", "max", "light", "hockey", "fly", "ally", "controll", "roll"}
   for _, aWord := range words {
     meas := FindMeasure(aWord)
     stem := Porters(aWord, meas)

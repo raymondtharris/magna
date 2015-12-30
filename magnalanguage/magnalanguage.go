@@ -391,8 +391,12 @@ func phaseFive(aStem string, wordMeasure int) string {
 		lRegexp := regexp.MustCompile(".*[aeiou].*([^dL])$")
 		//find second to last letter and see if they match the last letter if true
 		if len(lRegexp.FindAllString(aStem, 1)) > 0 {
-			aStem = lRegexp.ReplaceAllString(aStem, aStem[0:len(aStem)-1])
-			fmt.Println(aStem)
+			lastLetter := aStem[len(aStem)-1]
+			secondToLastLetter := aStem[len(aStem)-2]
+			if lastLetter == secondToLastLetter {
+				aStem = lRegexp.ReplaceAllString(aStem, aStem[0:len(aStem)-1])
+				fmt.Println(aStem)
+			}
 		}
 	}
 
