@@ -28,5 +28,17 @@ func TestMeasure(t *testing.T){
   }
 }
 func TestTokenize(t *testing.T){
+  words := []string{"the", "world", "farther", "places", "trusting", "higher", "max", "light", "hockey", "fly", "ally", "controll", "roll"}
+  nodes := []Node
+  for _, aWord := range words {
+    aNode := magnagraph.Node{1, aWord, 1, nil, -1, ""}
+    nodes = append(nodes, aNode)
+  }
+  fmt.Println(nodes)
+  for _, anode := range nodes {
+    
+  }
+}
+func TestProcessing(t *testing.T){
 
 }
