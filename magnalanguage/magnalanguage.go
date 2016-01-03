@@ -2,7 +2,7 @@ package  magnalanguage
 
 import (
 	"fmt"
-	"old_magna/magna/magnauser"
+	"github.com/magna/magnauser"
 	"strings"
 
 	"regexp"
