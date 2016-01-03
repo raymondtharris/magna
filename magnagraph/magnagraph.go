@@ -43,7 +43,7 @@ type Node struct {
 }
 
 func (mNode Node) String() string {
-	return fmt.Sprintf("Value: %v ProcessType: %v Weight: %v Neighbors: %v", mNode.Value, mNode.Measure, mNode.Weight, mNode.Neighbors)
+	return fmt.Sprintf("Value: %v Measure: %v Stem: %v Weight: %v Neighbors: %v\n", mNode.Value, mNode.Measure, mNode.Stem,mNode.Weight, mNode.Neighbors)
 }
 
 //Neighbor struct to store a node and the cost of the node

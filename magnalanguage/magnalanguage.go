@@ -19,7 +19,7 @@ const vowelRegexp = "[aeiou|y]"
 const consanantRegexp = "^" + vowelRegexp
 
 func (mqo MagnaQueryObject) String() string {
-	return fmt.Sprintf("User: %v, Query: %v", mqo.User, mqo.QueryString)
+	return fmt.Sprintf("User: %v, Query: %v\n", mqo.User, mqo.QueryString)
 }
 
 //const CommonDict = {"in", "a", "the", "of", "an"}
