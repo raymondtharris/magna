@@ -36,7 +36,6 @@ func TestTokenize(t *testing.T){
     aQueryObject := MagnaQueryObject{magnauser.User{"Wallace Mathers", 98239842773}, aSentence}
     nodes = append(nodes, aQueryObject)
   }
-  fmt.Println(nodes)
   tokenArray := []magnagraph.Node{}
   for _, anode := range nodes {
     tempNode := TokenizeQuery(anode)
@@ -53,7 +52,6 @@ func TestProcessing(t *testing.T){
     aQueryObject := MagnaQueryObject{magnauser.User{"Wallace Mathers", 98239842773}, aSentence}
     nodes = append(nodes, aQueryObject)
   }
-  fmt.Println(nodes)
   tokenArray := []magnagraph.Node{}
   for _, anode := range nodes {
     tempNode := TokenizeQuery(anode)
@@ -61,9 +59,8 @@ func TestProcessing(t *testing.T){
       tokenArray = append(tokenArray, tNode)
     }
   }
-  fmt.Println(tokenArray)
   for _, pNode := range tokenArray {
-    ProcessNode(pNode)
+    ProcessNode(&pNode)
   }
   fmt.Println(tokenArray)
 }

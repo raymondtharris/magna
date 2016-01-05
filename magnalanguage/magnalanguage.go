@@ -23,10 +23,11 @@ func (mqo MagnaQueryObject) String() string {
 }
 
 //const CommonDict = {"in", "a", "the", "of", "an"}
-func ProcessNode(aNode magnagraph.Node) {
+func ProcessNode(aNode *magnagraph.Node) {
 	//fmt.Println(aNode.Value)
 	aNode.Measure = FindMeasure(aNode.Value)
 	aNode.Stem = Porters(aNode.Value, aNode.Measure)
+	fmt.Println(aNode.Stem + "  " )
 }
 
 func AppendToStemmedSring(stemString string, aNode magnagraph.Node) {
