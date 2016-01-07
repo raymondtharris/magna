@@ -63,6 +63,7 @@ func queryHandler(w http.ResponseWriter, r *http.Request) {
 	fmt.Println(query)
 	queryTokens = magnalanguage.TokenizeQuery(query)
 	stemString = ""
+	magnalanguage.PartOfSpeachTag(queryTokens)
 	for _, aNode := range queryTokens {
 		magnalanguage.ProcessNode(aNode)
 		magnalanguage.AppendToStemmedSring(stemString, aNode)

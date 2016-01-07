@@ -42,6 +42,17 @@ func IsImportant(aWord string) bool {
 	return false
 }
 
+func PartOfSpeachTag(sentenceTokens []magnagraph.Node) bool {
+	for _, aWord := range sentenceTokens{
+		TagWord(aWord)
+	}
+	fmt.Println(sentenceTokens)
+}
+
+func TagWord(aNode magnagraph.Node) {
+
+}
+
 func FindMeasure(aWord string) int {
 	measureRegexp := regexp.MustCompile("[aeiou][^aeiou]")
 	aMeasure := len(measureRegexp.FindAllString(aWord, -1))
