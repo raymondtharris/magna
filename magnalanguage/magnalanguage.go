@@ -13,6 +13,9 @@ import (
 type MagnaQueryObject struct {
 	User        magnauser.User
 	QueryString string
+	StemString string
+	TokenArray []magnagraph.Node
+	ProcessStage int
 }
 
 const vowelRegexp = "[aeiou|y]"
@@ -40,6 +43,14 @@ func Categorize(aWord string) int {
 
 func IsImportant(aWord string) bool {
 	return false
+}
+
+func CreateStemString(aQueryObject MagnaQueryObject) {
+	if aQueryObject.ProcessStage > 2 {
+		for _, aStem := range aQueryObject.TokenArray {
+			aQueryObject.StemString = aQueryObject.StemString + " " + aStem
+		}
+	}
 }
 
 func PartOfSpeachTag(sentenceTokens []magnagraph.Node) bool {
