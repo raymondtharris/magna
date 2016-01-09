@@ -445,8 +445,14 @@ func TokenizeQuery(queryObject MagnaQueryObject) []magnagraph.Node {
 	return tokenArray
 }
 
-func BuildQuery(queryObject MagnaQueryObject) {
+func ProcessQueryObject(queryObject MagnaQueryObject) {
+	StemQueryObject(queryObject.TokenArray)
+}
 
+func StemQueryObject(tokenArray []magnagraph.Node) {
+	for _, aNode := range tokenArray {
+		
+	}
 }
 
 func ExecuteQuery() {
