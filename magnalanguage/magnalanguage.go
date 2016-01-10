@@ -87,6 +87,7 @@ func TokenizeQuery(queryObject MagnaQueryObject) []magnagraph.Node {
 
 func ProcessQueryObject(queryObject MagnaQueryObject) {
 	StemQueryObject(queryObject.TokenArray)
+	CreateStemString(queryObject)
 }
 
 func StemQueryObject(tokenArray []magnagraph.Node) {
