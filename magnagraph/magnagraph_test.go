@@ -1,7 +1,7 @@
 package magnagraph_test
 
 import(
-  "fmt"
+  "log"
   "testing"
   . "github.com/magna/magnagraph"
 )
@@ -19,7 +19,7 @@ func TestListNode(t *testing.T){
     qNode := node{nil, *aNode}
     qNodes = append(qNodes, qNode)
   }
-  fmt.Println(lNodes)
+  log.Println(lNodes)
 }
 
 func TestQueue(t *testing.T){
@@ -38,14 +38,14 @@ func TestQueue(t *testing.T){
   for _, qnode := range qNodes{
     aQueue.Enqueue(*qnode)
   }
-  fmt.Println(aQueue)
-  fmt.Print(aQueue.Length)
+  log.Println(aQueue)
+  log.Print(aQueue.Length)
   for !aQueue.isEmpty {
     aQueue.Dequeue()
-    fmt.Println(aQueue)
+    log.Println(aQueue)
   }
-  fmt.Println(aQueue)
-  fmt.Print(aQueue.Length)
+  log.Println(aQueue)
+  log.Print(aQueue.Length)
 }
 
 
@@ -56,7 +56,7 @@ func TestNode(t *testing.T){
     anode := Node{1, word, 0, nil, 0, ""}
     nodes = append(nodes, anode)
   }
-  fmt.Println(nodes)
+  log.Println(nodes)
 }
 
 
@@ -71,5 +71,5 @@ func TestGraph(t *testing.T){
   for _, aNode := range nodes {
     aGraph.AddVertex(*aNode)
   }
-  fmt.Println(aGraph)
+  log.Println(aGraph)
 }

@@ -1,7 +1,7 @@
 package magnalanguage_test
 
 import(
-  "fmt"
+  "log"
   "testing"
   . "github.com/magna/magnalanguage"
    "github.com/magna/magnagraph"
@@ -24,7 +24,7 @@ func TestTokenize(t *testing.T){
       tokenArray = append(tokenArray, tNode)
     }
   }
-  fmt.Println(tokenArray)
+  log.Println(tokenArray)
 }
 func TestProcessing(t *testing.T){
   //Processing test does the beginning of the tokenize test and then processes all of the nodes.
@@ -44,5 +44,5 @@ func TestProcessing(t *testing.T){
   for _, pNode := range tokenArray {
     ProcessNode(&pNode)//Does not return the correct node processed even though it goes through all the steps. Need to fix.
   }
-  fmt.Println(tokenArray)
+  log.Println(tokenArray)
 }

@@ -1,7 +1,7 @@
 package magnaio_test
 
 import (
-	"fmt"
+	"log"
 	"testing"
   . "github.com/magna/magnaio"
 )
@@ -14,5 +14,5 @@ func TestReadInput(t *testing.T) {
     _ = temp
      //inputValues = append(inputValues, temp)
   }
-  fmt.Println(inputValues)
+  log.Println(inputValues)
 }

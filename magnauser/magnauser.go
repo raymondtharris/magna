@@ -1,6 +1,6 @@
 package magnauser
 import (
-	"fmt"
+	"log"
 )
 
 //User is the object to store info about the user
@@ -10,7 +10,7 @@ type User struct {
 }
 
 func (mUser User) String() string {
-	return fmt.Sprintf("username: %v, Tag: %v", mUser.Name, mUser.IDTag)
+	return log.Sprintf("username: %v, Tag: %v", mUser.Name, mUser.IDTag)
 }
 
 //Interest is an object to store something the user likes
@@ -19,5 +19,5 @@ type Interest struct {
 }
 
 func (mInterest Interest) String() string {
-	return fmt.Sprintf("%v", mInterest.Name)
+	return log.Sprintf("%v", mInterest.Name)
 }

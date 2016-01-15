@@ -3,6 +3,7 @@ package magnaporters_test
 import (
   "log"
   . "github.com/magna/magnaporters"
+  "testing"
 )
 
 func TestMeasure(t *testing.T){

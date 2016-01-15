@@ -1,10 +1,10 @@
 package main
 
 import(
-  "fmt"
+  "log"
   "testing"
 )
 
 func TestQueryReceiving(t *testing.T){
-  fmt.Println("receving test")
+  log.Println("receving test")
 }
