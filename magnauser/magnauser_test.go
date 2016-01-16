@@ -1,6 +1,6 @@
 package  magnauser_test
 import(
-  "fmt"
+  "log"
   "testing"
   . "github.com/magna/magnauser"
 )

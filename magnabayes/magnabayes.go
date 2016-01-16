@@ -16,7 +16,7 @@ func (mDAG DAG) String() string {
 }
 
 //AddVertex function inserts a node into the ADJList if not present.
-func (mDAG DAG) AddVertex(newVertex *Node) {
+func (mDAG DAG) AddVertex(newVertex *magnagraph.Node) {
 	isInGraph := false
 	for _, aNode := range mDAG.ADJList {
 		if &aNode == newVertex {
@@ -27,6 +27,12 @@ func (mDAG DAG) AddVertex(newVertex *Node) {
 		mDAG.ADJList = append(mDAG.ADJList, *newVertex)
 		mDAG.NumberOfVerticies++
 	}
+}
+
+func (mDAG DAG) ADDVertecies(newVertecies []*magnagraph.Node) {
+  for _, aVertex := range newVertecies {
+    mDAG.AddVertex(aVertex)
+  }
 }
 
 //AddEdgeBetween function inserts an edge between two vertecies in the graph. This is done
