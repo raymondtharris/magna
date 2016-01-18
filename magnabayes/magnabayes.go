@@ -37,14 +37,10 @@ func (mDAG DAG) ADDVertecies(newVertecies []*magnagraph.Node) {
 
 //AddEdgeBetween function inserts an edge between two vertecies in the graph. This is done
 //by adding a Neighbor to the nodes.
-func (mDAG DAG) AddEdgeBetween(vertex1 *Node, andVertex2 *Node, withCosts []int) {
+func (mDAG DAG) AddEdgeBetween(vertex1 *Node, andVertex2 *Node, withCost int) {
 	mDAG.AddVertex(vertex1)
 	mDAG.AddVertex(andVertex2)
-	if len(withCosts) > 1 {
-		vertex1.AddNeighbor(andVertex2, withCosts[1])
-	} else {
-		vertex1.AddNeighbor(andVertex2, withCosts[0])
-	}
+	vertex1.AddNeighbor(andVertex2, withCost)
 }
 
 //findVertex function searches through  ADJList for a node. Will be switched to a binary search.

@@ -17,9 +17,16 @@ func buildTestNodes(){
   }
 }
 
-
-func TestDAG(t *testing.T){
+func TestAddEdgeBetween(t *testing.T){
   buildTestNodes()
+  for index, aWord :=  range testWords {
+    newNode := magnagraph.Node{index, aWord, 1, nil, -1, ""}
+    testNodes = append(testNodes, newNode)
+  }
+  mDAG.AddEdgeBetween(mDAG.ADJList[0], mDAG.ADJList[2], 1)
+  mDAG.AddEdgeBetween(mDAG.ADJList[1], mDAG.ADJList[7], 1)
+  mDAG.AddEdgeBetween(mDAG.ADJList[4], mDAG.ADJList[6], 1)
+  mDAG.AddEdgeBetween(mDAG.ADJList[5], mDAG.ADJList[3], 1)
 }
 
 func TestAddVertex(t *testing.T){
@@ -47,4 +54,16 @@ func TestFindByString(t *testing.T){
       foundNodes = append(foundNodes, foundVal)
     }
   }
+}
+
+func TestDAG(t *testing.T){
+  buildTestNodes()
+  for index, aWord :=  range testWords {
+    newNode := magnagraph.Node{index, aWord, 1, nil, -1, ""}
+    testNodes = append(testNodes, newNode)
+  }
+  mDAG.AddEdgeBetween(mDAG.ADJList[0], mDAG.ADJList[2], 1)
+  mDAG.AddEdgeBetween(mDAG.ADJList[1], mDAG.ADJList[7], 1)
+  mDAG.AddEdgeBetween(mDAG.ADJList[4], mDAG.ADJList[6], 1)
+  mDAG.AddEdgeBetween(mDAG.ADJList[5], mDAG.ADJList[3], 1)
 }
