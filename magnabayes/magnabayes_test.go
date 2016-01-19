@@ -27,6 +27,10 @@ func TestAddEdgeBetween(t *testing.T){
   mDAG.AddEdgeBetween(mDAG.ADJList[1], mDAG.ADJList[7], 1)
   mDAG.AddEdgeBetween(mDAG.ADJList[4], mDAG.ADJList[6], 1)
   mDAG.AddEdgeBetween(mDAG.ADJList[5], mDAG.ADJList[3], 1)
+  mDAG.AddEdgeBetween(mDAG.ADJList[1], mDAG.ADJList[4], 1)
+  mDAG.AddEdgeBetween(mDAG.ADJList[5], mDAG.ADJList[7], 1)
+  mDAG.AddEdgeBetween(mDAG.ADJList[6], mDAG.ADJList[7], 1)
+  mDAG.AddEdgeBetween(mDAG.ADJList[1], mDAG.ADJList[4], 1)
 }
 
 func TestAddVertex(t *testing.T){
@@ -66,4 +70,8 @@ func TestDAG(t *testing.T){
   mDAG.AddEdgeBetween(mDAG.ADJList[1], mDAG.ADJList[7], 1)
   mDAG.AddEdgeBetween(mDAG.ADJList[4], mDAG.ADJList[6], 1)
   mDAG.AddEdgeBetween(mDAG.ADJList[5], mDAG.ADJList[3], 1)
+  mDAG.AddEdgeBetween(mDAG.ADJList[1], mDAG.ADJList[4], 1)
+  mDAG.AddEdgeBetween(mDAG.ADJList[5], mDAG.ADJList[7], 1)
+  mDAG.AddEdgeBetween(mDAG.ADJList[6], mDAG.ADJList[7], 1)
+  mDAG.AddEdgeBetween(mDAG.ADJList[1], mDAG.ADJList[4], 1)
 }

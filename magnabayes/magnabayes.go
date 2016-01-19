@@ -61,3 +61,17 @@ func (mDAG DAG) findVertexByWord(aWord string) *Node {
 	}
 	return nil
 }
+
+func (mDAG DAG) RemoveVertex(vertexToRemove *magnagraph.Node) {
+  res := mDAG.findVertex(vertexToRemove)
+  if res != nil {
+    
+  }
+}
+
+func (mDAG DAG) RemoveVertexByWord(wordToRemove string) {
+  res := mDAG.findVertexByWord(wordToRemove)
+  if res != nil {
+
+  }
+}

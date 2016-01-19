@@ -25,12 +25,14 @@ type Graph struct {
 	NumberOfVerticies int
 	NumberOfEdges     int
 	ADJList           []Node
-	IsDirected        bool
+	//IsDirected        bool
 }
 
 func (mGraph Graph) String() string {
 	return fmt.Sprintf("Verticies: %v Edges: %v Directed: %v\n  List: %v", mGraph.NumberOfVerticies, mGraph.NumberOfEdges, mGraph.IsDirected, mGraph.ADJList)
 }
+
+
 
 //Node is something
 type Node struct {
