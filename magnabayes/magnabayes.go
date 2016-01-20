@@ -44,34 +44,43 @@ func (mDAG DAG) AddEdgeBetween(vertex1 *Node, andVertex2 *Node, withCost int) {
 }
 
 //findVertex function searches through  ADJList for a node. Will be switched to a binary search.
-func (mDAG DAG) findVertex(vertexToFind *Node) *Node {
-	for _, aNode := range mDAG.ADJList {
+func (mDAG DAG) findVertex(vertexToFind *Node) *Node, int {
+	for index, aNode := range mDAG.ADJList {
 		if &aNode == vertexToFind {
-			return &aNode
+			return &aNode, index
 		}
 	}
-	return nil
+	return nil, -1
 }
 
-func (mDAG DAG) findVertexByWord(aWord string) *Node {
-	for _, aNode := range mDAG.ADJList {
+func (mDAG DAG) findVertexByWord(aWord string) *Node, int {
+	for index , aNode := range mDAG.ADJList {
 		if &aNode.Value == aWord {
-			return &aNode
+			return &aNode, index
 		}
 	}
-	return nil
+	return nil, -1
 }
 
-func (mDAG DAG) RemoveVertex(vertexToRemove *magnagraph.Node) {
-  res := mDAG.findVertex(vertexToRemove)
+func (mDAG DAG) RemoveVertex(vertexToRemove *magnagraph.Node) bool {
+  res, index := mDAG.findVertex(vertexToRemove)
   if res != nil {
-    
+    tempArr1 := mDAG.ADJList[0,index-1]
+    tempArr2 := mDAG.ADJList[index+1, len(mDAG.ADJList)]
+    mDAG.ADJ = tempArr1 + tempArr2
+    return true
   }
+  return false
+
 }
 
-func (mDAG DAG) RemoveVertexByWord(wordToRemove string) {
-  res := mDAG.findVertexByWord(wordToRemove)
+func (mDAG DAG) RemoveVertexByWord(wordToRemove string)  bool{
+  res, index := mDAG.findVertexByWord(wordToRemove)
   if res != nil {
-
+    tempArr1 := mDAG.ADJList[0,index-1]
+    tempArr2 := mDAG.ADJList[index+1, len(mDAG.ADJList)]
+    mDAG.ADJ = tempArr1 + tempArr2
+    return true
   }
+  return false
 }
