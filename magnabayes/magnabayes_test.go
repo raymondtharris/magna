@@ -8,6 +8,8 @@ import(
 testWords := []string{"the", "world", "farther", "places", "trusting", "higher", "max", "light"}
 testNodes := []magnagraph.Node{}
 findStrings := []string{"farther", "world", "trusting", "light", "winner", "max", "alien"}
+toRemoveStrings := []string{"world", "places", "higher", "light", "world"}
+mDAG := DAG
 
 func buildTestNodes(){
   testNodes = []magnagraph.Node{}
@@ -16,6 +18,22 @@ func buildTestNodes(){
     testNodes = append(testNodes, newNode)
   }
 }
+
+func buildDAG()  {
+  buildTestNodes()
+  for _, aNode := range testNodes {
+    mDAG.AddVertex(aNode)
+  }
+  mDAG.AddEdgeBetween(mDAG.ADJList[0], mDAG.ADJList[2], 1)
+  mDAG.AddEdgeBetween(mDAG.ADJList[1], mDAG.ADJList[7], 1)
+  mDAG.AddEdgeBetween(mDAG.ADJList[4], mDAG.ADJList[6], 1)
+  mDAG.AddEdgeBetween(mDAG.ADJList[5], mDAG.ADJList[3], 1)
+  mDAG.AddEdgeBetween(mDAG.ADJList[1], mDAG.ADJList[4], 1)
+  mDAG.AddEdgeBetween(mDAG.ADJList[5], mDAG.ADJList[7], 1)
+  mDAG.AddEdgeBetween(mDAG.ADJList[6], mDAG.ADJList[7], 1)
+  mDAG.AddEdgeBetween(mDAG.ADJList[1], mDAG.ADJList[4], 1)
+}
+
 
 func TestAddEdgeBetween(t *testing.T){
   buildTestNodes()
@@ -45,6 +63,17 @@ func TestAddVertecies(t *testing.T){
   buildTestNodes()
   mDAG := DAG{0,0,[]magnagraph.Node{}}
   mDAG.ADDVertecies(testNodes)
+}
+
+func TestRemoveVertex(t *testing.T){
+
+}
+
+func TestRemoveVertexByWord(t *testing.T){
+  buildTestNodes()
+  for _, aWord := range toRemoveStrings{
+    mDAG.RemoveVertexByWord(aWord)
+  }
 }
 
 func TestFindByString(t *testing.T){
