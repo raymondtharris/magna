@@ -84,3 +84,8 @@ func (mDAG DAG) RemoveVertexByWord(wordToRemove string)  bool{
   }
   return false
 }
+
+func CheckForCycles(aDAG DAG) bool{
+  //Use BFS to search for cycles in the graph.
+  return false
+}
